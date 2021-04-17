@@ -1,45 +1,41 @@
 package dit.sdsw.sensors;
 
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import dit.sdsw.Utils;
 
 public class SensorParking {
 	
 	private int plazas; //Plazas ocupadas.
 	private int limite;
 	
-	public SensorParking() {
-		plazas = 0;
-		limite = 20;
+	public SensorParking(int limite) {
+		this.plazas = 0;
+		this.setLimite(limite);
 		
 		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {  
-            @Override
-            public void run() {  
-            	Random random = new Random();
-            	int diff = (random.nextInt(21) - 10);
-            	
-            	if(diff < 0 && (plazas + diff) < 0)
-            		diff = plazas;
-            	else if(diff > 0 && (plazas + diff) > limite)	
-            		diff = limite - plazas;
-            	
-            	plazas += diff;
-           }
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {  
+				setPlazas(Utils.randomIncrement(-5, 5, plazas, limite));
+			}
 		}, 0, 1000);
+	}
+
+	public int getPlazas() {
+		return plazas;
 	}
 
 	public void setPlazas(int plazas) {
 		this.plazas = plazas;
 	}
-	
-	public static void main(String[] args) throws InterruptedException {
-		SensorParking sensor = new SensorParking();
-		Thread.sleep(10000);
-		System.out.println("Running:" + sensor.plazas);
-		Thread.sleep(10000);
-		System.out.println("Running:" + sensor.plazas);
+
+	public int getLimite() {
+		return limite;
 	}
 
+	public void setLimite(int limite) {
+		this.limite = limite;
+	}
 }
