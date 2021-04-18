@@ -2,9 +2,11 @@ package dit.sdsw.client;
 
 import java.util.Scanner;
 
+import dit.sdsw.server.services.RegistraServicios;
+
 public class Secuencias {
 	
-	public static void iniciarContenedor(Scanner entradaEscaner) {
+	public static void iniciarContenedor(Scanner entradaEscaner, RegistraServicios srv) {
 		System.out.print ("**********************************************************\n"
 				+ "**************CREANDO CONTENEDOR INTELIGENTE**************\n"
 				+ "**********************************************************\n");
@@ -24,11 +26,11 @@ public class Secuencias {
 		//ServicioLog log_srv = srv.crearLog(args[3]);
 	}
 	
-	public static void iniciarParking(Scanner entradaEscaner) {
+	public static void iniciarParking(Scanner entradaEscaner, RegistraServicios srv) {
 		
 	}
 	
-	public static void iniciarFarola(Scanner entradaEscaner) {
+	public static void iniciarFarola(Scanner entradaEscaner, RegistraServicios srv) {
 		
 	}
 

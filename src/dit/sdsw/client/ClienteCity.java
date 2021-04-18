@@ -1,8 +1,8 @@
 package dit.sdsw.client;
 
 import java.rmi.*;
-import java.rmi.server.*;
 import java.util.Scanner;
+import dit.sdsw.server.services.*;
 
 
 class ClienteCity {
@@ -34,18 +34,19 @@ class ClienteCity {
            
         	
         	//RegistraServicios srv = 
+        	RegistraServicios srv = (RegistraServicios) Naming.lookup("//" + args[0] + ":" + args[1] + "/RegistraServicios");
         	
             switch (entradaTeclado) {
             	case 1: //Contenedor
-            		Secuencias.iniciarContenedor(entradaEscaner);
+            		Secuencias.iniciarContenedor(entradaEscaner, srv);
             		break;
             	
             	case 2: //Farola
-            		Secuencias.iniciarFarola(entradaEscaner);
+            		Secuencias.iniciarFarola(entradaEscaner, srv);
             		break;
             		
             	case 3: //Parking
-            		Secuencias.iniciarParking(entradaEscaner);
+            		Secuencias.iniciarParking(entradaEscaner, srv);
             		break;    
             }
         }
