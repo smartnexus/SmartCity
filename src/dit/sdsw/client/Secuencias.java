@@ -12,9 +12,9 @@ public class Secuencias {
 		System.out.println("\nNivel máximo (en cm):   ");
 		int nivelMax = entradaEscaner.nextInt();
 		System.out.println("\nLatitud:   ");
-		int Latitud = entradaEscaner.nextInt();
+		float Latitud = entradaEscaner.nextFloat();
 		System.out.println("\nLongitud:   ");
-		int Longitud = entradaEscaner.nextInt();
+		float Longitud = entradaEscaner.nextFloat();
 		System.out.println("\nTipo (1-Vidrio/ 2-Cartón/ 3-Orgánico/ 4-Plástico):   ");
 		int tipo = entradaEscaner.nextInt();
 		
