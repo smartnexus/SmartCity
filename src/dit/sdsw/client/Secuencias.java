@@ -7,10 +7,14 @@ import java.util.TimerTask;
 
 import dit.sdsw.Utils;
 import dit.sdsw.sensors.SensorContenedor; //TODO: Comentar esto, no debe importarse
+import dit.sdsw.sensors.SensorParking;
 import dit.sdsw.server.services.RegistraServicios;
 import dit.sdsw.server.services.ServicioContenedor;
+import dit.sdsw.server.services.ServicioParking;
 
 public class Secuencias {
+	
+	public static final String ANSI_BLUE = "\u001B[34m";
 	
 	public static void iniciarContenedor(Scanner entradaEscaner, RegistraServicios srv) throws RemoteException {
 		System.out.print ("**********************************************************\n"
@@ -51,12 +55,56 @@ public class Secuencias {
 		}, 0, 1000);
 	}
 	
-	public static void iniciarParking(Scanner entradaEscaner, RegistraServicios srv) {
+	public static void iniciarParking(Scanner entradaEscaner, RegistraServicios srv) throws RemoteException {
+		System.out.print ("**********************************************************\n"
+				+ "**************CREANDO PARKING INTELIGENTE**************\n"
+				+ "**********************************************************\n");
+		System.out.println("\nIntroduzca parámetros del parking...");
+		System.out.println("\nNombre:   ");
+		String nombre = entradaEscaner.next();
+		System.out.println("\nLatitud (separador ','):   ");
+		float latitud = entradaEscaner.nextFloat();
+		System.out.println("\nLongitud (separador ','):   ");
+		float longitud = entradaEscaner.nextFloat();
+		System.out.println("\nCapacidad total:   ");
+		int capacidadTotal = entradaEscaner.nextInt();
+		System.out.println("\nEstableciendo abierto: " + ANSI_BLUE + "\ntrue   ");
+		boolean abierto = true;
+		System.out.println("\nEstableciendo plazasOcupadas: " + ANSI_BLUE + "\n0   ");
+		int plazasOcupadas = 0;
+		
+		SensorParking sensor = new SensorParking(plazasOcupadas);
+		ServicioParking srvParking = srv.crearSrvParking(nombre, latitud, longitud, capacidadTotal, abierto, plazasOcupadas);
+		
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					srvParking.cambiarPlazasOcupadas(plazasOcupadas);
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+			}
+		}, 0, 1000);
+		
+		while(true) {
+			//TODO: Preguntar si se quiere cambiar el estado de abierto a cerrado y notificar al servidor.
+			srvParking.alertarCerrado();
+		}
 		
 	}
 	
 	public static void iniciarFarola(Scanner entradaEscaner, RegistraServicios srv) {
 		
 	}
+	
+//	public static void main(String args[]) {
+//		try {
+//			iniciarParking(new Scanner(System.in), null);
+//		} catch (RemoteException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 }

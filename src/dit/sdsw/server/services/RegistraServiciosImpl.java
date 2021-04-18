@@ -10,7 +10,7 @@ public class RegistraServiciosImpl implements RegistraServicios{
 	List<ServicioFarola> l_far;
 	int num_cont = 0;
 
-    RegistraServiciosImpl() throws RemoteException {
+    public RegistraServiciosImpl() throws RemoteException {
 		 l_cont = new LinkedList<ServicioContenedor>();
 		 l_park = new LinkedList<ServicioParking>();
 		 l_far = new LinkedList<ServicioFarola>();
