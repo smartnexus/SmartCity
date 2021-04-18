@@ -22,49 +22,42 @@ public class ServicioContenedorImpl implements ServicioContenedor{
 	@Override
 	public void alertarLleno() throws RemoteException {
 		// TODO: Cómo vamos a avisar. DUDAS aquí
-		System.out.println("[AVISO] Contenedor lleno (ID=" + this.id);
+		System.out.println("[AVISO] Contenedor lleno (ID=" + this.id + ")");
 		
-	}
-
-	@Override
-	public float obtenerId() throws RemoteException {
-		return this.id;
-	}
-
-	@Override
-	public float obtenerLatitud() throws RemoteException {
-		return this.latitud;
-	}
-
-	@Override
-	public float obtenerLongitud() throws RemoteException {
-		return this.longitud;
-	}
-
-	@Override
-	public int obtenerTipo() throws RemoteException {
-		return this.tipo;
-	}
-
-	@Override
-	public float obtenerPorcentaje() throws RemoteException {
-		return this.porcentaje;
-	}
-
-	@Override
-	public boolean isVacio() throws RemoteException {
-		return this.vacio;
-	}
-
-	@Override
-	public void cambiarVacio(boolean vacio) throws RemoteException {
-		this.vacio = vacio;		
 	}
 
 	@Override
 	public void cambiarPorcentaje(float porcentaje) throws RemoteException {
-		this.porcentaje = porcentaje;
-		
+		this.porcentaje = porcentaje;		
+	}
+	
+	public float getId() throws RemoteException {
+		return this.id;
+	}
+	
+	public boolean isVacio() throws RemoteException {
+		return this.vacio;
 	}
 
+	public float getLatitud() throws RemoteException {
+		return this.latitud;
+	}
+	
+	public float getLongitud() throws RemoteException {
+		return this.longitud;
+	}
+	
+	public float getPorcentaje() throws RemoteException {
+		return this.porcentaje;
+	}
+	
+	public int getTipo() throws RemoteException {
+		return this.tipo;
+	}
+	
+	
+	//ACLARACION: servidor pondrá contenedor vacío cuando reciba alerta de contenedor lleno (para simular recogida de residuos)
+	public void setVacio(boolean vacio) throws RemoteException {
+		this.vacio = vacio;		
+	}
 }
