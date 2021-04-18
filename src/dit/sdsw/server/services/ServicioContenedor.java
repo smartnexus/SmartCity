@@ -1,5 +1,10 @@
 package dit.sdsw.server.services;
 
-public class ServicioContenedor {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface ServicioContenedor extends Remote {
+	
+	public void alertarLleno() throws RemoteException;
 
 }
