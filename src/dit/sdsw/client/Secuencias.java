@@ -1,12 +1,18 @@
 package dit.sdsw.client;
 
+import java.rmi.RemoteException;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import dit.sdsw.Utils;
+import dit.sdsw.sensors.SensorContenedor; //TODO: Comentar esto, no debe importarse
 import dit.sdsw.server.services.RegistraServicios;
+import dit.sdsw.server.services.ServicioContenedor;
 
 public class Secuencias {
 	
-	public static void iniciarContenedor(Scanner entradaEscaner, RegistraServicios srv) {
+	public static void iniciarContenedor(Scanner entradaEscaner, RegistraServicios srv) throws RemoteException {
 		System.out.print ("**********************************************************\n"
 				+ "**************CREANDO CONTENEDOR INTELIGENTE**************\n"
 				+ "**********************************************************\n");
@@ -14,16 +20,33 @@ public class Secuencias {
 		System.out.println("\nNivel máximo (en cm):   ");
 		int nivelMax = entradaEscaner.nextInt();
 		System.out.println("\nLatitud:   ");
-		float Latitud = entradaEscaner.nextFloat();
+		float latitud = entradaEscaner.nextFloat();
 		System.out.println("\nLongitud:   ");
-		float Longitud = entradaEscaner.nextFloat();
+		float longitud = entradaEscaner.nextFloat();
 		System.out.println("\nTipo (1-Vidrio/ 2-Cartón/ 3-Orgánico/ 4-Plástico):   ");
 		int tipo = entradaEscaner.nextInt();
 		
-		//crear SensorContenedor ServicioSontenedor con los parametros indicados
-		//sensor=new.
-		//RegistrarServicior sensor_cont = (SensorContenedor) Naming.lookup("//" + args[0] + ":" + args[1] + "/SensorContenedor");
-		//ServicioLog log_srv = srv.crearLog(args[3]);
+		SensorContenedor sensorCont = new SensorContenedor(nivelMax);
+		ServicioContenedor srvCont = srv.crearSrvContenedor(latitud, longitud, tipo);
+		
+		//Comprobar cada segundo el nivel del contenedor. Si llega al novel máximo, alertar al servidor.
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {  
+				@Override
+	            public void run() { try { 
+					srvCont.cambiarPorcentaje(sensorCont.getNivel()*100/sensorCont.getNivelMax());
+					if (sensorCont.getNivel() == 0) 
+						srvCont.cambiarVacio(true) ;
+					else
+						srvCont.cambiarVacio(false); 
+	            	if (sensorCont.getNivel() == nivelMax)
+	            		srvCont.alertarLleno();	   
+	            		//TODO: servidor deve vaciar contenedor. Cómo??
+	           } catch (RemoteException e) {
+					e.printStackTrace();
+	           }
+			} 
+		}, 0, 1000);
 	}
 	
 	public static void iniciarParking(Scanner entradaEscaner, RegistraServicios srv) {

@@ -8,6 +8,7 @@ public class RegistraServiciosImpl implements RegistraServicios{
 	List<ServicioContenedor> l_cont;
 	List<ServicioParking> l_park;
 	List<ServicioFarola> l_far;
+	int num_cont = 0;
 
     RegistraServiciosImpl() throws RemoteException {
 		 l_cont = new LinkedList<ServicioContenedor>();
@@ -16,13 +17,10 @@ public class RegistraServiciosImpl implements RegistraServicios{
     }
     
 	@Override
-	public ServicioContenedor crearSrvContenedor(float latitud, float longitud, int tipo, float porcetaje,
-			boolean vacio) throws RemoteException {
-		//TODO: descomentar
-		//ServicioContenedor c = new ServicioContenedorImpl(latitud, longitud, tipo, porcetaje, vacio);
-		//l_cont.add(c);
-		//return c;
-		return null;
+	public ServicioContenedor crearSrvContenedor(float latitud, float longitud, int tipo) throws RemoteException {
+		ServicioContenedor c = new ServicioContenedorImpl(latitud, longitud, tipo);
+		l_cont.add(c);
+		return c;
 	}
 
 	@Override
