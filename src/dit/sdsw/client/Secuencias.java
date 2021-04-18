@@ -35,13 +35,15 @@ public class Secuencias {
 				@Override
 	            public void run() { try { 
 					srvCont.cambiarPorcentaje(sensorCont.getNivel()*100/sensorCont.getNivelMax());
-					if (sensorCont.getNivel() == 0) 
+					/* DUDA: hacer algo? como se comprueba esto
+					 * if (sensorCont.getNivel() == 0) 
 						srvCont.cambiarVacio(true) ;
 					else
 						srvCont.cambiarVacio(false); 
+					*/
 	            	if (sensorCont.getNivel() == nivelMax)
 	            		srvCont.alertarLleno();	   
-	            		//TODO: servidor deve vaciar contenedor. Cómo??
+	            		//TODO: servidor debe vaciar contenedor. Cómo??
 	           } catch (RemoteException e) {
 					e.printStackTrace();
 	           }
