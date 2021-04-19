@@ -1,63 +1,86 @@
 package dit.sdsw.server.services;
 
 import java.rmi.RemoteException;
+import java.util.UUID;
 
 public class ServicioContenedorImpl implements ServicioContenedor{
-	private int id;
+	private UUID id;
 	private float latitud;
 	private float longitud;
 	private int tipo; //tipo: 1-Vidrio/ 2-Cartón/ 3-Orgánico/ 4-Plástico
-	private float porcentaje = 0; //Porcentaje lleno
-	private boolean vacio = true;
+	private float porcentaje;
+	private boolean vaciar;
+	private boolean alertado;
 	
 
 	public ServicioContenedorImpl(float latitud, float longitud, int tipo) {
-		//TODO: @celllarod inicializar id
+		this.id = UUID.randomUUID();
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.tipo = tipo;
-
+		this.porcentaje = 0; //Porcentaje lleno
+		this.vaciar = false; 
+		this.alertado = false;
 	}
 
 	@Override
-	public void alertarLleno() throws RemoteException {
+	public void alertarLleno() throws RemoteException, InterruptedException{
 		// TODO: Cómo vamos a avisar. DUDAS aquí
-		System.out.println("[AVISO] Contenedor lleno (ID=" + this.id + ")");
-		
+		System.out.println("[AVISO:SRV_CONT] Contenedor lleno  (ID = " + this.id + ")");
+		System.out.print("**************** Vaciando contenedor (ID = " + this.id + ")");
+		Thread.sleep(5);  //Simula proceso en el que se van a recoger los residus
+		this.vaciar = true;		
 	}
-
+	
+	@Override
+	public void alertarVacio() throws RemoteException {
+		this.alertado = true;
+		System.out.println("[AVISO:SRV_CONT] Contenedor vaciado (ID=" + this.id + ")");
+		this.vaciar = false;		
+	}
+	
 	@Override
 	public void cambiarPorcentaje(float porcentaje) throws RemoteException {
 		this.porcentaje = porcentaje;		
 	}
 	
-	public float getId() throws RemoteException {
-		return this.id;
+	@Override
+	public void cambiarVaciar(boolean vaciar) throws RemoteException {
+		this.vaciar = vaciar;
+		this.alertado = false;
 	}
 	
-	public boolean isVacio() throws RemoteException {
-		return this.vacio;
+	@Override
+	public boolean obtenerVaciar() throws RemoteException {
+		return this.vaciar;
+	}
+	
+	@Override
+	public boolean obtenerAlertado() throws RemoteException {
+		return this.alertado;
+	}
+	
+	/*public boolean setAlertado() {
+		return this.alertado;
+	}*/
+	
+	public float getPorcentaje() {
+		return this.porcentaje;
+	}
+		
+	public UUID getId() {
+		return this.id;
 	}
 
-	public float getLatitud() throws RemoteException {
+	public float getLatitud() {
 		return this.latitud;
 	}
 	
-	public float getLongitud() throws RemoteException {
+	public float getLongitud() {
 		return this.longitud;
 	}
 	
-	public float getPorcentaje() throws RemoteException {
-		return this.porcentaje;
-	}
-	
-	public int getTipo() throws RemoteException {
+	public int getTipo() {
 		return this.tipo;
-	}
-	
-	
-	//ACLARACION: servidor pondrá contenedor vacío cuando reciba alerta de contenedor lleno (para simular recogida de residuos)
-	public void setVacio(boolean vacio) throws RemoteException {
-		this.vacio = vacio;		
 	}
 }

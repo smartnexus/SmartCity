@@ -2,7 +2,7 @@ package dit.sdsw.client;
 
 import java.rmi.*;
 import java.util.Scanner;
-import dit.sdsw.server.services.*;
+import dit.sdsw.server.services.*; //TODO: descomentar?
 
 
 class ClienteCity {
