@@ -81,7 +81,7 @@ public class Secuencias {
 			@Override
 			public void run() {
 				try {
-					srvParking.cambiarPlazasOcupadas(plazasOcupadas);
+					srvParking.cambiarPlazasOcupadas(sensor.getPlazas());
 				} catch (RemoteException e) {
 					e.printStackTrace();
 				}
@@ -89,8 +89,15 @@ public class Secuencias {
 		}, 0, 1000);
 		
 		while(true) {
-			//TODO: Preguntar si se quiere cambiar el estado de abierto a cerrado y notificar al servidor.
-			srvParking.alertarCerrado();
+			System.out.println("\nEstado actual del parking: " + (/*srvParking.obtenerAbierto()*/true?"abierto":"cerrado"));
+			System.out.println("Pulse 0 para cambiar el estado:   ");
+			int opcion = entradaEscaner.nextInt();
+			if(opcion == 0)
+				System.out.println("Cambiado correctamente.");
+				if(srvParking.obtenerAbierto())
+					srvParking.alertarAbierto();
+				else
+					srvParking.alertarCerrado();
 		}
 		
 	}
