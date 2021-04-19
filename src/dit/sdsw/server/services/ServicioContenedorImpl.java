@@ -1,9 +1,14 @@
 package dit.sdsw.server.services;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.UUID;
 
-public class ServicioContenedorImpl implements ServicioContenedor{
+public class ServicioContenedorImpl extends UnicastRemoteObject implements ServicioContenedor{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9114201825161312160L;
 	private UUID id;
 	private float latitud;
 	private float longitud;
@@ -13,7 +18,7 @@ public class ServicioContenedorImpl implements ServicioContenedor{
 	private boolean alertado;
 	
 
-	public ServicioContenedorImpl(float latitud, float longitud, int tipo) {
+	public ServicioContenedorImpl(float latitud, float longitud, int tipo) throws RemoteException {
 		this.id = UUID.randomUUID();
 		this.latitud = latitud;
 		this.longitud = longitud;
