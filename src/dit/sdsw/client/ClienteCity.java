@@ -40,7 +40,8 @@ class ClienteCity {
             		break;
             	
             	case 2: //Farola
-            		Secuencias.iniciarFarola(entradaEscaner, srv);
+            		long inicio = System.currentTimeMillis();
+            		Secuencias.iniciarFarola(entradaEscaner, srv, inicio);
             		break;
             		
             	case 3: //Parking

@@ -1,5 +1,10 @@
 package dit.sdsw.server.services;
 
-public class ServicioFarola {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
+public interface ServicioFarola extends Remote{
+	public void alertarCambioEstado() throws RemoteException;
+	public void setEstado(boolean estado) throws RemoteException;
+	public boolean isEstado_ant() throws RemoteException;
 }
