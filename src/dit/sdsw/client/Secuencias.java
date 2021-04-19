@@ -89,7 +89,7 @@ public class Secuencias {
 		}, 0, 1000);
 		
 		while(true) {
-			System.out.println("\nEstado actual del parking: " + (/*srvParking.obtenerAbierto()*/true?"abierto":"cerrado"));
+			System.out.println("\nEstado actual del parking: " + (srvParking.obtenerAbierto()?"abierto":"cerrado"));
 			System.out.println("Pulse 0 para cambiar el estado:   ");
 			int opcion = entradaEscaner.nextInt();
 			if(opcion == 0)
