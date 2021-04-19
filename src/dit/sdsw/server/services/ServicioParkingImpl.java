@@ -24,6 +24,10 @@ public class ServicioParkingImpl extends UnicastRemoteObject implements Servicio
 		this.abierto = abierto;
 		this.plazasOcupadas = plazasOcupadas;
 	}
+	
+	public boolean obtenerAbierto() throws RemoteException {
+		return abierto;
+	}
 
 	public void alertarAbierto() throws RemoteException {
 		this.abierto = true;
