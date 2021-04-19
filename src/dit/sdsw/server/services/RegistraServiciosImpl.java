@@ -32,12 +32,10 @@ public class RegistraServiciosImpl implements RegistraServicios{
 	}
 
 	@Override
-	public ServicioFarola crearSrvFarola() throws RemoteException {
-		// TODO descomentar y añadir parametros
-		//ServicioFarola c = new ServicioFarolaImpl(...);
-		//l_far.add(c);
-		//return c;
-		return null;
+	public ServicioFarola crearSrvFarola(float latitud, float longitud, String color, boolean estado) throws RemoteException {
+		ServicioFarola c = new ServicioFarolaImpl(latitud, longitud, color, estado);
+		l_far.add(c);
+		return c;
 	}	
 
 }

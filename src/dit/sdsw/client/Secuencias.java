@@ -5,12 +5,14 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import dit.sdsw.Utils;
+//import dit.sdsw.Utils;
 import dit.sdsw.sensors.SensorContenedor; //TODO: Comentar esto, no debe importarse
 import dit.sdsw.sensors.SensorParking;
+import dit.sdsw.sensors.SensorFarola;
 import dit.sdsw.server.services.RegistraServicios;
 import dit.sdsw.server.services.ServicioContenedor;
 import dit.sdsw.server.services.ServicioParking;
+import dit.sdsw.server.services.ServicioFarola;
 
 public class Secuencias {
 	
@@ -102,8 +104,40 @@ public class Secuencias {
 		
 	}
 	
-	public static void iniciarFarola(Scanner entradaEscaner, RegistraServicios srv) {
+	public static void iniciarFarola(Scanner entradaEscaner, RegistraServicios srv, long inicio) throws RemoteException{
+		System.out.print ("**********************************************************\n"
+				+ "**************CREANDO FAROLA INTELIGENTE**************\n"
+				+ "**********************************************************\n");
+		System.out.println("\nIntroduzca parámetros de la farola...");
+		System.out.println("\nLatitud (separador ','):   ");
+		float latitud = entradaEscaner.nextFloat();
+		System.out.println("\nLongitud (separador ','):   ");
+		float longitud = entradaEscaner.nextFloat();
+		System.out.println("\nColor:   ");
+		String color = entradaEscaner.next();
+		System.out.println("\nProcesando estado de la farola (false=apagado/true=encendido)\n");
+		boolean estado = false;
 		
+		SensorFarola sensor = new SensorFarola(inicio);
+		ServicioFarola srvFarola = srv.crearSrvFarola(latitud, longitud, color, estado);
+		
+		while (true) {
+			if (sensor.getNivel() > 0) {
+				//Significa que la farola debe estar encendida
+				srvFarola.setEstado(true);
+				if (srvFarola.isEstado_ant() != true) {
+					srvFarola.alertarCambioEstado();
+				}
+			}
+			if (sensor.getNivel() == 0) {
+				//Significa que la farola debe estar apagada
+				srvFarola.setEstado(false);
+				if (srvFarola.isEstado_ant() != false) {
+					srvFarola.alertarCambioEstado();
+				}
+			}
+			
+		}
 	}
 	
 //	public static void main(String args[]) {

@@ -7,7 +7,5 @@ public interface RegistraServicios extends Remote {
     ServicioContenedor crearSrvContenedor(float latitud, float longitud, int tipo) throws RemoteException;
     ServicioParking crearSrvParking(String nombre, float latitud, float longitud, int capacidadTotal, 
     		boolean abierto, int plazas_ocupadas) throws RemoteException;
-    
-    //TODO: @jacjurtab rellenar parámetros (constructor)
-    ServicioFarola crearSrvFarola() throws RemoteException;
+    ServicioFarola crearSrvFarola(float latitud, float longitud, String color, boolean estado) throws RemoteException;
 }
