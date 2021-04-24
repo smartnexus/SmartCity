@@ -2,6 +2,8 @@ package dit.sdsw.client;
 
 import java.rmi.*;
 import java.util.Scanner;
+
+import dit.sdsw.Color;
 import dit.sdsw.server.services.*; //TODO: descomentar?
 
 
@@ -26,15 +28,16 @@ class ClienteCity {
         	
         	
         	//Solicitar qué elemento inteligente se quiere crear
-        	System.out.println ("\t 1) Contenedor");
-        	System.out.println ("\t 2) Farola");
-        	System.out.println ("\t 3) Parking");
+        	System.out.println(Color.BLUE + "\r[*] Listando opciones disponibles...\n" + Color.RESET);
+        	System.out.println (Color.BLUE + "\t 1) " + Color.RESET + "Contenedor");
+        	System.out.println (Color.BLUE + "\t 2) " + Color.RESET + "Farola");
+        	System.out.println (Color.BLUE + "\t 3) " + Color.RESET + "Parking");
         	
         	int entradaTeclado = 0;
         	Scanner entradaEscaner = new Scanner(System.in); //Creación de un objeto Scanner
         	
         	do {
-        		System.out.print ("Seleccione el NÚMERO del elemento inteligente que desea crear: ");
+        		System.out.print(Color.YELLOW + "\nSeleccione el NÚMERO del elemento inteligente que desea crear: " + Color.RESET);
         		entradaTeclado = entradaEscaner.nextInt(); //Invocamos un método sobre un objeto Scanner
                 /// System.out.println ("Entrada recibida por teclado es: \"" + entradaTeclado +"\"");  
         	} while (entradaTeclado!=1 && entradaTeclado!=2 && entradaTeclado!=3); 
