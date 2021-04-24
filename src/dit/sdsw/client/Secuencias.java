@@ -19,8 +19,6 @@ import dit.sdsw.server.services.ServicioFarola;
 
 public class Secuencias {
 	
-	public static final String ANSI_BLUE = "";//"\u001B[34m";
-	
 	
 	public static void iniciarContenedor(Scanner entradaEscaner, RegistraServicios srv) throws RemoteException {
 		System.out.print ("**********************************************************\n"
@@ -64,24 +62,24 @@ public class Secuencias {
 	}
 	
 	public static void iniciarParking(Scanner entradaEscaner, RegistraServicios srv) throws RemoteException {
-		System.out.print ("**********************************************************\n"
-				+ "**************CREANDO PARKING INTELIGENTE**************\n"
+		System.out.println("**********************************************************\n"
+				+ "***************CREANDO PARKING INTELIGENTE***************\n"
 				+ "**********************************************************\n");
 		System.out.println("\nIntroduzca parámetros del parking...");
-		System.out.println("\nNombre:   ");
+		System.out.println("\nNombre: ");
 		String nombre = entradaEscaner.next();
-		System.out.println("\nLatitud (separador ','):   ");
+		System.out.println("\nLatitud (separador ','): ");
 		float latitud = entradaEscaner.nextFloat();
-		System.out.println("\nLongitud (separador ','):   ");
+		System.out.println("\nLongitud (separador ','): ");
 		float longitud = entradaEscaner.nextFloat();
-		System.out.println("\nCapacidad total:   ");
+		System.out.println("\nCapacidad total: ");
 		int capacidadTotal = entradaEscaner.nextInt();
-		System.out.println("\nEstableciendo abierto: " + Color.BLUE + "\ntrue" + Color.RESET);
+		System.out.println("\nEstableciendo abierto: " + Color.BLUE + "true" + Color.RESET);
 		boolean abierto = true;
-		System.out.println("\nEstableciendo plazasOcupadas: " + Color.BLUE + "\n0" + Color.RESET);
+		System.out.println("\nEstableciendo plazasOcupadas: " + Color.BLUE + "0" + Color.RESET);
 		int plazasOcupadas = 0;
 		
-		SensorParking sensor = new SensorParking(plazasOcupadas);
+		SensorParking sensor = new SensorParking(capacidadTotal);
 		ServicioParking srvParking = srv.crearSrvParking(nombre, latitud, longitud, capacidadTotal, abierto, plazasOcupadas);
 		
 		Timer timer = new Timer();
@@ -89,7 +87,10 @@ public class Secuencias {
 			@Override
 			public void run() {
 				try {
-					srvParking.cambiarPlazasOcupadas(sensor.getPlazas());
+					if(!srvParking.obtenerAbierto()) 
+						sensor.setPlazas(0);
+					 else
+						 srvParking.cambiarPlazasOcupadas(sensor.getPlazas());
 				} catch (RemoteException e) {
 					e.printStackTrace();
 				}
@@ -97,21 +98,21 @@ public class Secuencias {
 		}, 0, 5000);
 		
 		while(true) {
-			System.out.println("\nEstado actual del parking: " + (srvParking.obtenerAbierto()?"abierto":"cerrado"));
-			System.out.println("Pulse 0 para cambiar el estado:   ");
+			System.out.println("\nEstado actual del parking: " + (srvParking.obtenerAbierto()?Color.GREEN + "abierto":Color.RED + "cerrado") + Color.RESET);
+			System.out.println("Pulse 0 para cambiar el estado: ");
 			int opcion = entradaEscaner.nextInt();
 			if(opcion == 0)
-				System.out.println("Cambiado correctamente.");
 				if(srvParking.obtenerAbierto())
-					srvParking.alertarAbierto();
-				else
 					srvParking.alertarCerrado();
+				else
+					srvParking.alertarAbierto();
+				System.out.println("\nCambiado correctamente.");
 		}
 		
 	}
 	
 	public static void iniciarFarola(Scanner entradaEscaner, RegistraServicios srv, long inicio) throws RemoteException{
-		System.out.print ("**********************************************************\n"
+		System.out.print("**********************************************************\n"
 				+ "**************CREANDO FAROLA INTELIGENTE**************\n"
 				+ "**********************************************************\n");
 		System.out.println("\nIntroduzca parámetros de la farola...");

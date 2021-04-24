@@ -11,6 +11,8 @@ import dit.sdsw.server.services.RegistraServiciosImpl;
 @SuppressWarnings("deprecation")
 public class ServidorCity {
 	
+	private static Logger logger;
+
 	public static void main (String args[]) throws RemoteException {
 		
 		if (args.length!=1) {
@@ -21,9 +23,12 @@ public class ServidorCity {
 		Utils.initRMIRegistry(args[0]);
 		System.out.println("Registro RMI creado en el puerto: " + args[0]);
 		
+		logger = new Logger(false, "log.file");
+		
         if (System.getSecurityManager() == null) {
             System.setSecurityManager(new RMISecurityManager());
         }
+        
         try {
             RegistraServicios srv = new RegistraServiciosImpl();
             Naming.rebind("rmi://localhost:" + args[0] + "/RegistraServicios", srv);
@@ -37,5 +42,13 @@ public class ServidorCity {
             e.printStackTrace();
             System.exit(1);
         }
+	}
+	
+	public static Logger getLogger() {
+		return logger;
+	}
+
+	public static void setLog(Logger logger) {
+		ServidorCity.logger = logger;
 	}
 }

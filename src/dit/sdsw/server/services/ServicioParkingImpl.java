@@ -3,6 +3,8 @@ package dit.sdsw.server.services;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import dit.sdsw.server.ServidorCity;
+
 public class ServicioParkingImpl extends UnicastRemoteObject implements ServicioParking {
 
 	private static final long serialVersionUID = 2429902483238591715L;
@@ -26,24 +28,24 @@ public class ServicioParkingImpl extends UnicastRemoteObject implements Servicio
 	}
 	
 	public boolean obtenerAbierto() throws RemoteException {
-		System.out.println("[AVISO:SRV_PARK] El cliente ha solicitado el valor del atributo: abierto (Nombre='" + nombre +"')");
+		ServidorCity.getLogger().info("[AVISO:SRV_PARK] El cliente ha solicitado el valor del atributo: abierto (Nombre='" + nombre +"')");
 		return abierto;
 	}
 
 	public void alertarAbierto() throws RemoteException {
-		System.out.println("[AVISO:SRV_PARK] Se ha cambiado abierto a true (Nombre='" + nombre +"')");
+		ServidorCity.getLogger().info("[AVISO:SRV_PARK] Se ha cambiado abierto a true (Nombre='" + nombre +"')");
 		this.abierto = true;
 		
 	}
 
 	public void alertarCerrado() throws RemoteException {
-		System.out.println("[AVISO:SRV_PARK] Se ha cambiado abierto a false (Nombre='" + nombre +"')");
+		ServidorCity.getLogger().info("[AVISO:SRV_PARK] Se ha cambiado abierto a false (Nombre='" + nombre +"')");
 		this.abierto = false;
 		
 	}
 
 	public void cambiarPlazasOcupadas(int plazasOcupadas) throws RemoteException {
-		System.out.println("[AVISO:SRV_PARK] Se ha cambiado plazasOcupadas a " + plazasOcupadas + " (Nombre='" + nombre +"')");
+		ServidorCity.getLogger().info("[AVISO:SRV_PARK] Se ha cambiado plazasOcupadas a " + plazasOcupadas + " (Nombre='" + nombre +"')");
 		this.plazasOcupadas = plazasOcupadas;
 		
 	}
