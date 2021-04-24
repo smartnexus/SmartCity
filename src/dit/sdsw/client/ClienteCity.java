@@ -61,11 +61,10 @@ class ClienteCity {
             }
         }
         catch (RemoteException e) {
-            System.err.println("Error de comunicacion: " + e.toString());
+            System.err.println(Color.RED + "[*] Error de comunicacion con servidor.");
         }
         catch (Exception e) {
-            System.err.println("Excepcion en ClienteCity:");
-            e.printStackTrace();
+            System.err.println(Color.RED + "[*] Excepcion en ClienteCity.");
         }
     }
 }
