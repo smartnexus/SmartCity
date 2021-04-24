@@ -14,12 +14,15 @@ public class SensorContenedor {
 		this.nivelMax = nivelMax;
 		this.vaciando = false;
 		
+		System.out.println("Nivel: " + this.nivel + "\n Nivel Máximo: " + this.nivelMax);
+		
 		//Simulamos el incremento del nivel de basura en el contenedor de forma aleatoria.
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {  
 				@Override
 	            public void run() {  
 	            	setNivel(Utils.randomIncrement(0, 20, nivel, nivelMax));
+	            	System.out.println("Nivel: "+ getNivel());
 	           }
 			}, 0, 1000);
 		

@@ -9,6 +9,5 @@ public interface ServicioContenedor extends Remote {
 	public void alertarVacio() throws RemoteException;
 	public void cambiarVaciar(boolean vaciar) throws RemoteException;
 	public boolean obtenerVaciar() throws RemoteException;
-	public boolean obtenerAlertado() throws RemoteException;
 	public void cambiarPorcentaje(float porcentaje) throws RemoteException;
 }
