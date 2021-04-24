@@ -32,7 +32,7 @@ public class ServicioContenedorImpl extends UnicastRemoteObject implements Servi
 	public void alertarLleno() throws RemoteException, InterruptedException{
 		// TODO: Cómo vamos a avisar. DUDAS aquí
 		System.out.println("[AVISO:SRV_CONT] Contenedor lleno  (ID = " + this.id + ")");
-		System.out.print("**************** Vaciando contenedor (ID = " + this.id + ")");
+		System.out.println("**************** Vaciando contenedor (ID = " + this.id + ")");
 		Thread.sleep(5);  //Simula proceso en el que se van a recoger los residus
 		this.vaciar = true;		
 	}
