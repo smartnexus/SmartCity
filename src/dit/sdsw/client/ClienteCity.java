@@ -18,19 +18,18 @@ class ClienteCity {
         try {
         	
         	//Solicitar qué elemento inteligente se quiere crear
-        	System.out.println ("\t\t 1) Contenedor");
-        	System.out.println ("\t\t 2) Farola");
-        	System.out.println ("\t\t 1) Parking");
+        	System.out.println ("\t 1) Contenedor");
+        	System.out.println ("\t 2) Farola");
+        	System.out.println ("\t 3) Parking");
         	
         	int entradaTeclado = 0;
         	Scanner entradaEscaner = new Scanner(System.in); //Creación de un objeto Scanner
         	
-        	do { 
+        	do {
         		System.out.print ("Seleccione el NÚMERO del elemento inteligente que desea crear:      ");
         		entradaTeclado = entradaEscaner.nextInt(); //Invocamos un método sobre un objeto Scanner
                 /// System.out.println ("Entrada recibida por teclado es: \"" + entradaTeclado +"\"");  
-        		System.out.println();
-        	} while (entradaTeclado!=1 || entradaTeclado!=2 || entradaTeclado!=3);
+        	} while (entradaTeclado!=1 && entradaTeclado!=2 && entradaTeclado!=3); 
            
         	RegistraServicios srv = (RegistraServicios) Naming.lookup("//" + args[0] + ":" + args[1] + "/RegistraServicios");
         	

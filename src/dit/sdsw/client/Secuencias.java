@@ -18,7 +18,7 @@ import dit.sdsw.server.services.ServicioFarola;
 
 public class Secuencias {
 	
-	public static final String ANSI_BLUE = "\u001B[34m";
+	public static final String ANSI_BLUE = "";//"\u001B[34m";
 	
 	
 	public static void iniciarContenedor(Scanner entradaEscaner, RegistraServicios srv) throws RemoteException {
@@ -93,7 +93,7 @@ public class Secuencias {
 					e.printStackTrace();
 				}
 			}
-		}, 0, 1000);
+		}, 0, 5000);
 		
 		while(true) {
 			System.out.println("\nEstado actual del parking: " + (srvParking.obtenerAbierto()?"abierto":"cerrado"));
