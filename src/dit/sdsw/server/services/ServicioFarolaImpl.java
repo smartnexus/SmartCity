@@ -23,7 +23,7 @@ public class ServicioFarolaImpl extends UnicastRemoteObject implements ServicioF
 	}
 	
 	public void alertarCambioEstado() throws RemoteException {
-		System.out.println("[AVISO:SRV_FAR] La farola" + id +" ha cambiado de estado");
+		System.out.println("[AVISO:SRV_FAR] La farola " + id.toString().substring(0,5) +" ha cambiado de estado");
 		estado_ant = estado;
 	}
 

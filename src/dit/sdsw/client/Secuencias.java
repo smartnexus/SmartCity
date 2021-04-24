@@ -132,23 +132,34 @@ public class Secuencias {
 		SensorFarola sensor = new SensorFarola(inicio);
 		ServicioFarola srvFarola = srv.crearSrvFarola(latitud, longitud, color, estado);
 		
-		while (true) {
-			if (sensor.getNivel() > 0) {
-				//Significa que la farola debe estar encendida
-				srvFarola.setEstado(true);
-				if (srvFarola.isEstado_ant() != true) {
-					srvFarola.alertarCambioEstado();
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					if (sensor.getNivel() > 0) {
+						//Significa que la farola debe estar encendida
+						srvFarola.setEstado(true);
+						if (srvFarola.isEstado_ant() != true) {
+							
+							System.out.println("Se ha encendido la farola a las " + sensor.getHora() + " horas");
+							srvFarola.alertarCambioEstado();
+						}
+					}
+					if (sensor.getNivel() == 0) {
+						//Significa que la farola debe estar apagada
+						srvFarola.setEstado(false);
+						if (srvFarola.isEstado_ant() != false) {
+							System.out.println("Se ha apagado la farola a las " + sensor.getHora() + " horas");
+							srvFarola.alertarCambioEstado();
+						}
+					}
+				
+				} catch (RemoteException e) {
+					e.printStackTrace();
 				}
 			}
-			if (sensor.getNivel() == 0) {
-				//Significa que la farola debe estar apagada
-				srvFarola.setEstado(false);
-				if (srvFarola.isEstado_ant() != false) {
-					srvFarola.alertarCambioEstado();
-				}
-			}
-			
-		}
+		}, 0, 1000);
 	}
 	
 //	public static void main(String args[]) {

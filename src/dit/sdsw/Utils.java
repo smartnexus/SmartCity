@@ -40,8 +40,6 @@ public class Utils {
 		//que ya han pasado
 		//Como un dia dura 24 segundos pasamos el tiempo que ha transcurrido a segundos
 		double tiempo = (double) ((ahora - inicio)/1000);
-		//TODO alomejor habria que truncar el double, no estoy seguro que al decir int se trunque solo y añadir println a cada hora para informar que hora es
-		//La hora del día va a ser el resto del tiempo transcurrido en segundos entre 24 (horas del dia)
 		int hora = (int) (tiempo % 24);
 		switch (hora) {
 		case 0: nivel = 80;
