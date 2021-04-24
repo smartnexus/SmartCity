@@ -3,6 +3,8 @@ package dit.sdsw.server;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+import dit.sdsw.Color;
+
 public class Logger {
 	
 	private boolean enabled = false;
@@ -20,7 +22,7 @@ public class Logger {
 	
 	public void info(String m) {
 		if(enabled) 
-			System.out.println(m);
+			System.out.println("\n" + Color.BLUE + "[*] " + Color.RESET + m);
 		
 		fd.println(m);
 		fd.flush();
