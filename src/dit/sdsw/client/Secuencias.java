@@ -14,20 +14,23 @@ import dit.sdsw.server.services.ServicioContenedor;
 import dit.sdsw.server.services.ServicioParking;
 import dit.sdsw.server.services.ServicioFarola;
 
+
+
 public class Secuencias {
 	
 	public static final String ANSI_BLUE = "\u001B[34m";
 	
+	
 	public static void iniciarContenedor(Scanner entradaEscaner, RegistraServicios srv) throws RemoteException {
 		System.out.print ("**********************************************************\n"
-				+ "**************CREANDO CONTENEDOR INTELIGENTE**************\n"
-				+ "**********************************************************\n");
+						+ "**************CREANDO CONTENEDOR INTELIGENTE**************\n"
+						+ "**********************************************************\n");
 		System.out.println("\nIntroduzca parámetros del conteneror...");
 		System.out.println("\nNivel máximo (en cm):   ");
 		int nivelMax = entradaEscaner.nextInt();
-		System.out.println("\nLatitud:   ");
+		System.out.println("\nLatitud (separador ','):   ");
 		float latitud = entradaEscaner.nextFloat();
-		System.out.println("\nLongitud:   ");
+		System.out.println("\nLongitud (separador ','):   ");
 		float longitud = entradaEscaner.nextFloat();
 		System.out.println("\nTipo (1-Vidrio/ 2-Cartón/ 3-Orgánico/ 4-Plástico):   ");
 		int tipo = entradaEscaner.nextInt();
@@ -40,18 +43,20 @@ public class Secuencias {
 		timer.schedule(new TimerTask() {  
 				@Override
 	            public void run() { try { 
+	            	
 					srvCont.cambiarPorcentaje(sensorCont.getNivel()*100/sensorCont.getNivelMax());
-					/* DUDA: hacer algo? como se comprueba esto
-					 * if (sensorCont.getNivel() == 0) 
-						srvCont.cambiarVacio(true) ;
-					else
-						srvCont.cambiarVacio(false); 
-					*/
-	            	if (sensorCont.getNivel() == nivelMax)
-	            		srvCont.alertarLleno();	   
-	            		//TODO: servidor debe vaciar contenedor. Cómo??
+	            	if (sensorCont.getNivel() == nivelMax && !srvCont.obtenerAlertado()) {
+	            		srvCont.alertarLleno();	    //Este método se va a ejecutar en el servidor
+	            	}
+	            	if (srvCont.obtenerVaciar()) {  //Servidor ha marcado contenedor para vaciar
+	            		sensorCont.setNivel(0);
+	            		srvCont.alertarVacio();	            		
+	            	}
 	           } catch (RemoteException e) {
 					e.printStackTrace();
+	           } catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 	           }
 			} 
 		}, 0, 1000);

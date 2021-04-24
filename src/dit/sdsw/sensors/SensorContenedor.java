@@ -7,10 +7,12 @@ import dit.sdsw.Utils;
 public class SensorContenedor {
 	private int nivel;       //Medido en centímetros
 	private int nivelMax; 
+	private boolean vaciando;
    
 	public SensorContenedor(int nivelMax) {
 		this.nivel = 0;
 		this.nivelMax = nivelMax;
+		this.vaciando = false;
 		
 		//Simulamos el incremento del nivel de basura en el contenedor de forma aleatoria.
 		Timer timer = new Timer();
@@ -38,17 +40,26 @@ public class SensorContenedor {
 	public void setNivel(int nivel) {
 		this.nivel = nivel;
 	}	
-	/*	public static void main(String args[]) throws InterruptedException {
-		SensorContenedor sensor = new SensorContenedor(150);
-		while(true) {
-			Thread.sleep(1*1000);
-			System.out.println(sensor.getNivel());
-			
-			if(sensor.getNivel() == 150) {
-				sensor.setNivel(0);
-			}
-		}		
+
+	public boolean isVaciando() {
+		return vaciando;
 	}
-	 */
+
+	public void setVaciando(boolean vaciando) {
+		this.vaciando = vaciando;
+	}
+	
+	/*	public static void main(String args[]) throws InterruptedException {
+	SensorContenedor sensor = new SensorContenedor(150);
+	while(true) {
+		Thread.sleep(1*1000);
+		System.out.println(sensor.getNivel());
+		
+		if(sensor.getNivel() == 150) {
+			sensor.setNivel(0);
+		}
+	}		
+}
+ */
 }
 
