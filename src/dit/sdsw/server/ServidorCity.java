@@ -3,6 +3,7 @@ package dit.sdsw.server;
 import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
+import java.util.Scanner;
 
 import dit.sdsw.Utils;
 import dit.sdsw.server.services.RegistraServicios;
@@ -30,8 +31,30 @@ public class ServidorCity {
         }
         
         try {
+        	
             RegistraServicios srv = new RegistraServiciosImpl();
             Naming.rebind("rmi://localhost:" + args[0] + "/RegistraServicios", srv);
+
+            do {
+	            System.out.println ("\t 1) Listar CONTENEDORES existentes en la ciudad.");
+	        	System.out.println ("\t 2) Listar   PARKINGS   existentes en la ciudad.");
+	        	System.out.println ("\t 3) Listar   FAROLAS    existentes en la ciudad.");
+	        	System.out.println ("\t 4) Mostrar alertas.");
+	        	System.out.println ("\t 5) Salir");
+	        	
+	        	
+	        	int entradaTeclado = 0;
+	        	Scanner entradaEscaner = new Scanner(System.in); //Creación de un objeto Scanner
+	        	
+	        	do {
+	        		System.out.print ("Seleccione la opción deseada: ");
+	        		entradaTeclado = entradaEscaner.nextInt(); //Invocamos un método sobre un objeto Scanner
+	                /// System.out.println ("Entrada recibida por teclado es: \"" + entradaTeclado +"\"");  
+	        	} while (entradaTeclado!=1 && entradaTeclado!=2 && entradaTeclado!=3 && entradaTeclado!=4); 
+           
+	        	
+	        	
+            } while(true);
         }
         catch (RemoteException e) {
             System.err.println("Error de comunicacion: " + e.toString());
