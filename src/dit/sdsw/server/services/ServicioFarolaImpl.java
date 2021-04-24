@@ -12,7 +12,7 @@ public class ServicioFarolaImpl extends UnicastRemoteObject implements ServicioF
 	
 	UUID id;
     float latitud;
-    float longitud;
+	float longitud;
     String color;
     boolean estado;//false representa apagado y true encendido
     boolean estado_ant = false; //Entendemos que las farolas inicialmente están apagadas
@@ -44,6 +44,42 @@ public class ServicioFarolaImpl extends UnicastRemoteObject implements ServicioF
 
 	public void setEstado_ant(boolean estado_ant) {
 		this.estado_ant = estado_ant;
+	}
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public float getLatitud() {
+		return latitud;
+	}
+
+	public void setLatitud(float latitud) {
+		this.latitud = latitud;
+	}
+
+	public float getLongitud() {
+		return longitud;
+	}
+
+	public void setLongitud(float longitud) {
+		this.longitud = longitud;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+	
+	@Override
+	public String toString() {
+		return (id.toString().substring(0, 5) + "\t" + latitud + "\t" + longitud + "\t" + color + "\t" + estado);
 	}
 	
 

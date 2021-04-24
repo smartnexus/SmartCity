@@ -78,4 +78,9 @@ public class ServicioContenedorImpl extends UnicastRemoteObject implements Servi
 	public int getTipo() {
 		return this.tipo;
 	}
+	
+	@Override
+	public String toString() {
+		return (id.toString().substring(0, 5) + "\t" + latitud + "\t" + longitud + "\t" + tipo + "\t" + porcentaje);
+	}
 }
