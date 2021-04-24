@@ -1,5 +1,8 @@
 package dit.sdsw.server.services;
 import java.util.*;
+
+import dit.sdsw.server.ServidorCity;
+
 import java.rmi.*;
 import java.rmi.server.*;
 
@@ -23,7 +26,7 @@ public class ServicioFarolaImpl extends UnicastRemoteObject implements ServicioF
 	}
 	
 	public void alertarCambioEstado() throws RemoteException {
-		System.out.println("[AVISO:SRV_FAR] La farola " + id.toString().substring(0,5) +" ha cambiado de estado");
+		ServidorCity.getLogger().info("[AVISO:SRV_FAR] La farola " + id.toString().substring(0,5) +" ha cambiado de estado");
 		estado_ant = estado;
 	}
 
