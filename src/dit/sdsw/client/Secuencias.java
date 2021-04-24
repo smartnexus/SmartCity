@@ -21,71 +21,77 @@ public class Secuencias {
 	
 	
 	public static void iniciarContenedor(Scanner entradaEscaner, RegistraServicios srv) throws RemoteException {
-		System.out.print ("**********************************************************\n"
-						+ "**************CREANDO CONTENEDOR INTELIGENTE**************\n"
-						+ "**********************************************************\n");
-		System.out.println("\nIntroduzca parámetros del conteneror...");
-		System.out.println("\nNivel máximo (en cm):   ");
+		System.out.println(Color.PURPLE + "**********************************************************\n"
+				+ "*************" + Color.GREEN + "CREANDO CONTENEDOR INTELIGENTE" + Color.PURPLE + "***************\n"
+				+ "**********************************************************");
+		System.out.println(Color.BLUE + "\n[*] Introduzca parámetros del contenedor..." + Color.RESET);
+		System.out.print(Color.YELLOW + "\nNivel máximo (en cm): " + Color.RESET);
 		int nivelMax = entradaEscaner.nextInt();
-		System.out.println("\nLatitud (separador ','):   ");
+		System.out.print(Color.YELLOW + "Latitud (separador ','): " + Color.RESET);
 		float latitud = entradaEscaner.nextFloat();
-		System.out.println("\nLongitud (separador ','):   ");
+		System.out.print(Color.YELLOW + "Longitud (separador ','): " + Color.RESET);
 		float longitud = entradaEscaner.nextFloat();
-		System.out.println("\nTipo (1-Vidrio/ 2-Cartón/ 3-Orgánico/ 4-Plástico):   ");
+		System.out.print(Color.YELLOW + "Tipo (1-Vidrio/ 2-Cartón/ 3-Orgánico/ 4-Plástico): " + Color.RESET);
 		int tipo = entradaEscaner.nextInt();
 		
 		SensorContenedor sensorCont = new SensorContenedor(nivelMax);
 		ServicioContenedor srvCont = srv.crearSrvContenedor(latitud, longitud, tipo);
-		System.out.println("Contenedor inteligente creado.");
+		
+		System.out.println(Color.BLUE + "\n[*] Contenedor inteligente creado." + Color.RESET);
 		
 		//Comprobar cada segundo el nivel del contenedor. Si llega al novel máximo, alertar al servidor.
+		System.out.println("\n----------------------------------\n");
+		
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {  
-				@Override
-	            public void run() { try { 
-	            	
+			@Override
+			public void run() {
+				try { 
 					srvCont.cambiarPorcentaje(sensorCont.getNivel()*100/sensorCont.getNivelMax());
-					System.out.println("Porcentaje: " + sensorCont.getNivel()*100/sensorCont.getNivelMax());
-					
-	            	if (sensorCont.getNivel() == nivelMax && !srvCont.obtenerVaciar()) {
-	            		System.out.println("Contenedor lleno, alertando al servidor...");
-	            		srvCont.alertarLleno();	    //Este método se va a ejecutar en el servidor
-	            	}
-	            	if (srvCont.obtenerVaciar()) {  //Servidor ha marcado contenedor para vaciar
-	            		sensorCont.setNivel(0);
-	            		srvCont.alertarVacio();	
-	            		System.out.println("Contenedor vaciado");
-	            	}
-	           } catch (RemoteException e) {
-					e.printStackTrace();
-	           } catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-	           }
+					int perc = sensorCont.getNivel()*100/sensorCont.getNivelMax();
+					System.out.print("\r" + Color.YELLOW + "Porcentaje: " + (perc==100?Color.RED + perc:perc) + "%" + Color.RESET);
+						
+		            if (sensorCont.getNivel() == nivelMax && !srvCont.obtenerVaciar()) {
+		            	System.out.println(Color.BLUE + "\n\n[*] Contenedor lleno, alertando al servidor..." + Color.RESET);
+		            	srvCont.alertarLleno();	    //Este método se va a ejecutar en el servidor
+		            }
+		            if (srvCont.obtenerVaciar()) {  //Servidor ha marcado contenedor para vaciar
+		            	sensorCont.setNivel(0);
+		            	srvCont.alertarVacio();	
+		            	System.out.println(Color.BLUE + "\n[*] Contenedor vaciado." + Color.RESET);
+		            	System.out.println("\n----------------------------------\n");
+		            }
+		        } catch (RemoteException e) {
+		        	e.printStackTrace();
+		        } catch (InterruptedException e) {
+		        	e.printStackTrace();
+		        }
 			} 
 		}, 0, 1000);
 	}
 	
 	public static void iniciarParking(Scanner entradaEscaner, RegistraServicios srv) throws RemoteException {
-		System.out.println("**********************************************************\n"
-				+ "***************CREANDO PARKING INTELIGENTE***************\n"
-				+ "**********************************************************\n");
-		System.out.println("\nIntroduzca parámetros del parking...");
-		System.out.println("\nNombre: ");
+		System.out.println(Color.PURPLE + "**********************************************************\n"
+				+ "****************" + Color.GREEN + "CREANDO PARKING INTELIGENTE" + Color.PURPLE + "***************\n"
+				+ "**********************************************************");
+		System.out.println(Color.BLUE + "\n[*] Introduzca parámetros del parking..." + Color.RESET);
+		System.out.print(Color.YELLOW + "\nNombre: " + Color.RESET);
 		String nombre = entradaEscaner.next();
-		System.out.println("\nLatitud (separador ','): ");
+		System.out.print(Color.YELLOW + "Latitud (separador ','): " + Color.RESET);
 		float latitud = entradaEscaner.nextFloat();
-		System.out.println("\nLongitud (separador ','): ");
+		System.out.print(Color.YELLOW + "Longitud (separador ','): " + Color.RESET);
 		float longitud = entradaEscaner.nextFloat();
-		System.out.println("\nCapacidad total: ");
+		System.out.print(Color.YELLOW + "Capacidad total: " + Color.RESET);
 		int capacidadTotal = entradaEscaner.nextInt();
-		System.out.println("\nEstableciendo abierto: " + Color.BLUE + "true" + Color.RESET);
+		System.out.print(Color.YELLOW + "Estableciendo abierto: " + Color.RESET + "true");
 		boolean abierto = true;
-		System.out.println("\nEstableciendo plazasOcupadas: " + Color.BLUE + "0" + Color.RESET);
+		System.out.println(Color.YELLOW + "\nEstableciendo plazasOcupadas: " + Color.RESET + "0");
 		int plazasOcupadas = 0;
 		
 		SensorParking sensor = new SensorParking(capacidadTotal);
 		ServicioParking srvParking = srv.crearSrvParking(nombre, latitud, longitud, capacidadTotal, abierto, plazasOcupadas);
+		
+		System.out.println(Color.BLUE + "\n[*] Parking inteligente creado." + Color.RESET);
 		
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -103,35 +109,42 @@ public class Secuencias {
 		}, 0, 5000);
 		
 		while(true) {
-			System.out.println("\nEstado actual del parking: " + (srvParking.obtenerAbierto()?Color.GREEN + "abierto":Color.RED + "cerrado") + Color.RESET);
-			System.out.println("Pulse 0 para cambiar el estado: ");
+			System.out.println("\n----------------------------------");
+			System.out.print(Color.YELLOW + "\r\nEstado actual del parking: " + (srvParking.obtenerAbierto()?Color.GREEN + "abierto":Color.RED + "cerrado") + Color.RESET);
+			System.out.print(Color.YELLOW + "\r\n\nPulse 0 para cambiar el estado: " + Color.RESET);
 			int opcion = entradaEscaner.nextInt();
 			if(opcion == 0)
 				if(srvParking.obtenerAbierto())
 					srvParking.alertarCerrado();
 				else
 					srvParking.alertarAbierto();
-				System.out.println("\nCambiado correctamente.");
+			
+			System.out.print(Color.BLUE + "\r\n[*] Cambiado correctamente.\n" + Color.RESET);
 		}
 		
 	}
 	
 	public static void iniciarFarola(Scanner entradaEscaner, RegistraServicios srv, long inicio) throws RemoteException{
-		System.out.print("**********************************************************\n"
-				+ "**************CREANDO FAROLA INTELIGENTE**************\n"
+		System.out.print(Color.PURPLE + "**********************************************************\n"
+				+ "****************" + Color.GREEN + "CREANDO FAROLA INTELIGENTE" + Color.PURPLE + "****************\n"
 				+ "**********************************************************\n");
-		System.out.println("\nIntroduzca parámetros de la farola...");
-		System.out.println("\nLatitud (separador ','):   ");
+		System.out.println(Color.BLUE + "\n[*] Introduzca parámetros de la farola..." + Color.RESET);
+		
+		System.out.print(Color.YELLOW + "\nLatitud (separador ','): " + Color.RESET);
 		float latitud = entradaEscaner.nextFloat();
-		System.out.println("\nLongitud (separador ','):   ");
+		System.out.print(Color.YELLOW + "Longitud (separador ','): " + Color.RESET);
 		float longitud = entradaEscaner.nextFloat();
-		System.out.println("\nColor:   ");
+		System.out.print(Color.YELLOW + "Color: " + Color.RESET);
 		String color = entradaEscaner.next();
-		System.out.println("\nProcesando estado de la farola (false=apagado/true=encendido)\n");
 		boolean estado = false;
+		
+		System.out.println(Color.BLUE + "\n[*] Farola inteligente creado." + Color.RESET);
+		System.out.println(Color.BLUE + "\n[*] Procesando estado de la farola..." + Color.RESET);
 		
 		SensorFarola sensor = new SensorFarola(inicio);
 		ServicioFarola srvFarola = srv.crearSrvFarola(latitud, longitud, color, estado);
+		
+		System.out.println("\n-------------------------------------------\n");
 		
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -142,8 +155,7 @@ public class Secuencias {
 						//Significa que la farola debe estar encendida
 						srvFarola.setEstado(true);
 						if (srvFarola.isEstado_ant() != true) {
-							
-							System.out.println("Se ha encendido la farola a las " + sensor.getHora() + " horas");
+							System.out.print(Color.BLUE + "\r[*] Se ha encendido la farola a las " + sensor.getHora() + " horas" + Color.RESET);
 							srvFarola.alertarCambioEstado();
 						}
 					}
@@ -151,7 +163,7 @@ public class Secuencias {
 						//Significa que la farola debe estar apagada
 						srvFarola.setEstado(false);
 						if (srvFarola.isEstado_ant() != false) {
-							System.out.println("Se ha apagado la farola a las " + sensor.getHora() + " horas");
+							System.out.print(Color.BLUE + "\r[*] Se ha apagado la farola a las " + sensor.getHora() + " horas      " + Color.RESET);
 							srvFarola.alertarCambioEstado();
 						}
 					}
@@ -162,13 +174,5 @@ public class Secuencias {
 			}
 		}, 0, 1000);
 	}
-	
-//	public static void main(String args[]) {
-//		try {
-//			iniciarParking(new Scanner(System.in), null);
-//		} catch (RemoteException e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 }
