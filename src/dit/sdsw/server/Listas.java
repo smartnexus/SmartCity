@@ -16,7 +16,7 @@ public class Listas {
 		this.srv = srv;
 	}
 	
-	public void ListarContenedores (RegistraServiciosImpl srv) {
+	public void listarContenedores () {
 		List<ServicioContenedor> lista = srv.getL_cont();
 		for(int indice = 0;indice<lista.size();indice++)
 		{
@@ -24,7 +24,7 @@ public class Listas {
 		}
 	}
 	
-	public void ListarFarolas () {
+	public void listarFarolas () {
 		List<ServicioFarola> lista = srv.getL_far();
 		for(int indice = 0;indice<lista.size();indice++)
 		{
@@ -32,7 +32,7 @@ public class Listas {
 		}
 	}
 	
-	public void ListarParkings () {
+	public void listarParkings () {
 		List<ServicioParking> lista = srv.getL_park();
 		for(int indice = 0;indice<lista.size();indice++)
 		{
