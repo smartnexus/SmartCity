@@ -33,13 +33,12 @@ public class ServicioContenedorImpl extends UnicastRemoteObject implements Servi
 		// TODO: Cómo vamos a avisar. DUDAS aquí
 		System.out.println("[AVISO:SRV_CONT] Contenedor lleno  (ID = " + this.id + ")");
 		System.out.println("**************** Vaciando contenedor (ID = " + this.id + ")");
-		Thread.sleep(5);  //Simula proceso en el que se van a recoger los residus
-		this.vaciar = true;		
+		this.vaciar = true;
+		Thread.sleep(5000);  //Simula proceso en el que se van a recoger los residus	
 	}
 	
 	@Override
 	public void alertarVacio() throws RemoteException {
-		this.alertado = true;
 		System.out.println("[AVISO:SRV_CONT] Contenedor vaciado (ID=" + this.id + ")");
 		this.vaciar = false;		
 	}
@@ -59,15 +58,6 @@ public class ServicioContenedorImpl extends UnicastRemoteObject implements Servi
 	public boolean obtenerVaciar() throws RemoteException {
 		return this.vaciar;
 	}
-	
-	@Override
-	public boolean obtenerAlertado() throws RemoteException {
-		return this.alertado;
-	}
-	
-	/*public boolean setAlertado() {
-		return this.alertado;
-	}*/
 	
 	public float getPorcentaje() {
 		return this.porcentaje;

@@ -38,6 +38,7 @@ public class Secuencias {
 		
 		SensorContenedor sensorCont = new SensorContenedor(nivelMax);
 		ServicioContenedor srvCont = srv.crearSrvContenedor(latitud, longitud, tipo);
+		System.out.println("Contenedor inteligente creado.");
 		
 		//Comprobar cada segundo el nivel del contenedor. Si llega al novel máximo, alertar al servidor.
 		Timer timer = new Timer();
@@ -46,12 +47,16 @@ public class Secuencias {
 	            public void run() { try { 
 	            	
 					srvCont.cambiarPorcentaje(sensorCont.getNivel()*100/sensorCont.getNivelMax());
-	            	if (sensorCont.getNivel() == nivelMax && !srvCont.obtenerAlertado()) {
+					System.out.println("Porcentaje: " + sensorCont.getNivel()*100/sensorCont.getNivelMax());
+					
+	            	if (sensorCont.getNivel() == nivelMax && !srvCont.obtenerVaciar()) {
+	            		System.out.println("Contenedor lleno, alertando al servidor...");
 	            		srvCont.alertarLleno();	    //Este método se va a ejecutar en el servidor
 	            	}
 	            	if (srvCont.obtenerVaciar()) {  //Servidor ha marcado contenedor para vaciar
 	            		sensorCont.setNivel(0);
-	            		srvCont.alertarVacio();	            		
+	            		srvCont.alertarVacio();	
+	            		System.out.println("Contenedor vaciado");
 	            	}
 	           } catch (RemoteException e) {
 					e.printStackTrace();
