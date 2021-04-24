@@ -1,12 +1,12 @@
 package dit.sdsw;
 
 public class Color {
-	public static final String RESET = "\u001B[30;9m";
-	public static final String RED = "\u001B[31;9m";
-	public static final String GREEN = "\u001B[32;9m";
-	public static final String YELLOW = "\u001B[33;9m";
-	public static final String BLUE = "\u001B[34;9m";
-	public static final String PURPLE = "\u001B[35;9m";
-	public static final String CYAN = "\u001B[36;9m";
-	public static final String WHITE = "\u001B[37;9m";
+	public static final String BLACK = "\u001B[30m";
+	public static final String RED = "\u001B[31m";
+	public static final String GREEN = "\u001B[32m";
+	public static final String YELLOW = "\u001B[33m";
+	public static final String BLUE = "\u001B[34m";
+	public static final String PURPLE = "\u001B[35m";
+	public static final String CYAN = "\u001B[36m";
+	public static final String RESET = "\u001B[37m";
 }

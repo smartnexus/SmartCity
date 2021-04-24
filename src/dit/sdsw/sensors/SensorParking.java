@@ -18,7 +18,7 @@ public class SensorParking {
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {  
-				setPlazas(Utils.randomIncrement(-5, 5, plazas, limite));
+				setPlazas(Utils.randomIncrement(-20, 20, plazas, limite));
 			}
 		}, 0, 1000);
 	}

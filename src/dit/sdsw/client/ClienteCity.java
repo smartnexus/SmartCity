@@ -16,6 +16,14 @@ class ClienteCity {
             System.setSecurityManager(new SecurityManager());
 
         try {
+//        	System.out.println("   ____                       _       ____ _ _           ");
+//        	System.out.println("  / ___| _ __ ___   __ _ _ __| |_    / ___(_) |_         ");
+//        	System.out.println("  \___ \| '_ ` _ \ / _` | '__| __|  | |   | | __| | | |  ");
+//        	System.out.println("   ___) | | | | | | (_| | |  | |_   | |___| | |_| |_| |  ");
+//        	System.out.println("  |____/|_| |_| |_|\__,_|_|   \__|   \____|_|\__|\__, |  ");
+//        	System.out.println("                                                 |___/   ");
+//        	System.out.println("                                                         ");
+        	
         	
         	//Solicitar qué elemento inteligente se quiere crear
         	System.out.println ("\t 1) Contenedor");
@@ -26,12 +34,13 @@ class ClienteCity {
         	Scanner entradaEscaner = new Scanner(System.in); //Creación de un objeto Scanner
         	
         	do {
-        		System.out.print ("Seleccione el NÚMERO del elemento inteligente que desea crear:      ");
+        		System.out.print ("Seleccione el NÚMERO del elemento inteligente que desea crear: ");
         		entradaTeclado = entradaEscaner.nextInt(); //Invocamos un método sobre un objeto Scanner
                 /// System.out.println ("Entrada recibida por teclado es: \"" + entradaTeclado +"\"");  
         	} while (entradaTeclado!=1 && entradaTeclado!=2 && entradaTeclado!=3); 
            
         	RegistraServicios srv = (RegistraServicios) Naming.lookup("//" + args[0] + ":" + args[1] + "/RegistraServicios");
+        	System.out.println("");
         	
             switch (entradaTeclado) {
             	case 1: //Contenedor
