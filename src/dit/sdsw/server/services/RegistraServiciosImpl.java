@@ -41,6 +41,21 @@ public class RegistraServiciosImpl extends UnicastRemoteObject implements Regist
 		ServicioFarola c = new ServicioFarolaImpl(latitud, longitud, color, estado);
 		l_far.add(c);
 		return c;
-	}	
+	}
+
+	public List<ServicioContenedor> getL_cont() {
+		return l_cont;
+	}
+
+
+	public List<ServicioParking> getL_park() {
+		return l_park;
+	}
+
+
+	public List<ServicioFarola> getL_far() {
+		return l_far;
+	}
+
 
 }

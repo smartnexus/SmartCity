@@ -31,6 +31,9 @@ public class ServidorCity {
         
         try {
             RegistraServicios srv = new RegistraServiciosImpl();
+            RegistraServiciosImpl srv2 = (RegistraServiciosImpl) srv;
+            Listas listas = new Listas(srv2);
+            
             Naming.rebind("rmi://localhost:" + args[0] + "/RegistraServicios", srv);
         }
         catch (RemoteException e) {
