@@ -42,7 +42,7 @@ public class ServidorCity {
 
             int entradaTeclado = 0;
             do {
-            	System.out.println ("¿Qué dese hacer?");
+            	System.out.println ("¿Qué desea hacer?");
 	            System.out.println (Color.BLUE + "\t 1) "+ Color.RESET + " Listar CONTENEDORES existentes en la ciudad.");
 	        	System.out.println (Color.BLUE + "\t 2) "+ Color.RESET + " Listar   PARKINGS   existentes en la ciudad.");
 	        	System.out.println (Color.BLUE + "\t 3) "+ Color.RESET + " Listar   FAROLAS    existentes en la ciudad.");
@@ -81,8 +81,15 @@ public class ServidorCity {
 	            		break;
 	            	case 4: //Mostrar logs
 	            		System.out.println(Color.RED +"\n---------------------------------------------" + Color.RESET);
-	            		System.out.println(Color.BLUE + "[*] Mostrando alertas..." + Color.RESET);
-	            		//listas.listarFarolas();
+	            		System.out.println(Color.BLUE + "[*] Mostrando alertas (Pulse \"0\" para salir de este modo) ..." + Color.RESET);
+	            		logger.setEnabled(true);
+	            		int entrada = 8;
+	            		while(entrada != 0){
+	            			entrada = entradaEscaner.nextInt();
+	            			if (entrada == 0) {
+	            				logger.setEnabled(false);
+	            			}
+	            		}
 	            		System.out.println(Color.RED +"\n---------------------------------------------" + Color.RESET);
 	            		break;
 	        	}      	
@@ -108,4 +115,5 @@ public class ServidorCity {
 	public static void setLog(Logger logger) {
 		ServidorCity.logger = logger;
 	}
+	
 }
