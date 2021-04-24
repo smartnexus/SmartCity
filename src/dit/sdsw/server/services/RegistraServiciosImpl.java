@@ -1,10 +1,15 @@
 package dit.sdsw.server.services;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.LinkedList;
 import java.util.List;
 
-public class RegistraServiciosImpl implements RegistraServicios{
+public class RegistraServiciosImpl extends UnicastRemoteObject implements RegistraServicios {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4886948558163037526L;
 	List<ServicioContenedor> l_cont;
 	List<ServicioParking> l_park;
 	List<ServicioFarola> l_far;

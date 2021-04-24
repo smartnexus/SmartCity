@@ -1,8 +1,19 @@
 package dit.sdsw;
 
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.util.Random;
 
 public class Utils {
+	
+	public static void initRMIRegistry(String portNumber) {
+		try {
+			LocateRegistry.createRegistry(Integer.valueOf(portNumber));
+		} catch (RemoteException e) {
+			System.err.println("Puerto " + portNumber + "en uso.");
+			e.printStackTrace();
+		}
+	}
 		
 	/**
 	 * @param min -> Minimum value to inc/dec
