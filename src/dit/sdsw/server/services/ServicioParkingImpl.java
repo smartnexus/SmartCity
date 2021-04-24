@@ -49,5 +49,10 @@ public class ServicioParkingImpl extends UnicastRemoteObject implements Servicio
 		this.plazasOcupadas = plazasOcupadas;
 		
 	}
+	
+	@Override
+	public String toString() {
+		return (nombre + "\t" + latitud + "\t" + longitud + "\t" + capacidadTotal + "\t" + abierto + "\t" + plazasOcupadas);
+	}
 
 }
