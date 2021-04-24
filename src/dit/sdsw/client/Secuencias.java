@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import dit.sdsw.Color;
 //import dit.sdsw.Utils;
 import dit.sdsw.sensors.SensorContenedor; //TODO: Comentar esto, no debe importarse
 import dit.sdsw.sensors.SensorParking;
@@ -75,9 +76,9 @@ public class Secuencias {
 		float longitud = entradaEscaner.nextFloat();
 		System.out.println("\nCapacidad total:   ");
 		int capacidadTotal = entradaEscaner.nextInt();
-		System.out.println("\nEstableciendo abierto: " + ANSI_BLUE + "\ntrue   ");
+		System.out.println("\nEstableciendo abierto: " + Color.BLUE + "\ntrue" + Color.RESET);
 		boolean abierto = true;
-		System.out.println("\nEstableciendo plazasOcupadas: " + ANSI_BLUE + "\n0   ");
+		System.out.println("\nEstableciendo plazasOcupadas: " + Color.BLUE + "\n0" + Color.RESET);
 		int plazasOcupadas = 0;
 		
 		SensorParking sensor = new SensorParking(plazasOcupadas);
