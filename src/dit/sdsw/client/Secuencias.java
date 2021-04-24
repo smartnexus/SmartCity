@@ -49,7 +49,7 @@ public class Secuencias {
 				try { 
 					srvCont.cambiarPorcentaje(sensorCont.getNivel()*100/sensorCont.getNivelMax());
 					int perc = sensorCont.getNivel()*100/sensorCont.getNivelMax();
-					System.out.print("\r" + Color.YELLOW + "Porcentaje: " + (perc==100?Color.RED + perc:perc) + "%" + Color.RESET);
+					System.out.print("\r" + Color.YELLOW + "Porcentaje: " + (perc==100?Color.RED + perc:Color.GREEN + perc) + "%" + Color.RESET);
 						
 		            if (sensorCont.getNivel() == nivelMax && !srvCont.obtenerVaciar()) {
 		            	System.out.println(Color.BLUE + "\n\n[*] Contenedor lleno, alertando al servidor..." + Color.RESET);
@@ -62,7 +62,8 @@ public class Secuencias {
 		            	System.out.println("\n----------------------------------\n");
 		            }
 		        } catch (RemoteException e) {
-		        	e.printStackTrace();
+		        	System.err.println(Color.RED + "\n[*] Error de comunicacion con servidor.");
+					System.exit(0);
 		        } catch (InterruptedException e) {
 		        	e.printStackTrace();
 		        }
@@ -103,7 +104,8 @@ public class Secuencias {
 					 else
 						 srvParking.cambiarPlazasOcupadas(sensor.getPlazas());
 				} catch (RemoteException e) {
-					e.printStackTrace();
+					System.err.println(Color.RED + "\n[*] Error de comunicacion con servidor.");
+					System.exit(0);
 				}
 			}
 		}, 0, 5000);
@@ -169,7 +171,8 @@ public class Secuencias {
 					}
 				
 				} catch (RemoteException e) {
-					e.printStackTrace();
+					System.err.println(Color.RED + "\n[*] Error de comunicacion con servidor.");
+					System.exit(0);
 				}
 			}
 		}, 0, 1000);
