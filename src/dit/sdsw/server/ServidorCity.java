@@ -26,8 +26,6 @@ public class ServidorCity {
 		Utils.initRMIRegistry(args[0]);
 		System.out.println(Color.RED + "Registro RMI creado en el puerto: " + args[0] + Color.RESET);
 		
-		logger = new Logger(false, "log.file");
-		
         if (System.getSecurityManager() == null) {
             System.setSecurityManager(new RMISecurityManager());
         }
@@ -37,6 +35,7 @@ public class ServidorCity {
             RegistraServicios srv = new RegistraServiciosImpl();
             RegistraServiciosImpl srv2 = (RegistraServiciosImpl) srv;
             Listas listas = new Listas(srv2);
+            logger = new Logger(false, "log.file", listas);
             
             Naming.rebind("rmi://localhost:" + args[0] + "/RegistraServicios", srv);
 
