@@ -34,7 +34,7 @@ public class ServicioContenedorImpl extends UnicastRemoteObject implements Servi
 	public void alertarLleno() throws RemoteException, InterruptedException{
 		// TODO: Cómo vamos a avisar. DUDAS aquí
 		ServidorCity.getLogger().info("[AVISO:SRV_CONT] Contenedor lleno  (ID = " + id.toString().substring(0,5) + ")");
-		System.out.println("**************** Vaciando contenedor (ID = " + id.toString().substring(0,5) + ")");
+		ServidorCity.getLogger().info("**************** Avisando al servicio de recogida de residuos (ID = " + id.toString().substring(0,5) + ")");
 		this.vaciar = true;
 		Thread.sleep(5000);  //Simula proceso en el que se van a recoger los residus	
 	}
@@ -83,6 +83,6 @@ public class ServicioContenedorImpl extends UnicastRemoteObject implements Servi
 	
 	@Override
 	public String toString() {
-		return (id.toString().substring(0, 5) + "\t" + latitud + "\t" + longitud + "\t" + tipo + "\t" + porcentaje);
+		return (id.toString().substring(0, 5) + "," + latitud + "," + longitud + "," + tipo + "," + porcentaje);
 	}
 }
