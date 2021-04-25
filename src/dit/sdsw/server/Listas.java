@@ -83,6 +83,14 @@ public class Listas {
 				System.out.println();			
 			}
 		}
+	}
+
+	public RegistraServiciosImpl getSrv() {
+		return srv;
+	}
+
+	public void setSrv(RegistraServiciosImpl srv) {
+		this.srv = srv;
 	}	
 }
 

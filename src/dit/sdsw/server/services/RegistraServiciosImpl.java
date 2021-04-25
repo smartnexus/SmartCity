@@ -5,6 +5,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.LinkedList;
 import java.util.List;
 
+import dit.sdsw.server.ServidorCity;
+
 public class RegistraServiciosImpl extends UnicastRemoteObject implements RegistraServicios {
 	/**
 	 * 
@@ -25,6 +27,7 @@ public class RegistraServiciosImpl extends UnicastRemoteObject implements Regist
 	public ServicioContenedor crearSrvContenedor(float latitud, float longitud, int tipo) throws RemoteException {
 		ServicioContenedor c = new ServicioContenedorImpl(latitud, longitud, tipo);
 		l_cont.add(c);
+		ServidorCity.getLogger().info("[AVISO:SRV_REG] Se ha registrado un nuevo contenedor. (Actual: " + l_cont.size() + ")");
 		return c;
 	}
 
@@ -33,6 +36,7 @@ public class RegistraServiciosImpl extends UnicastRemoteObject implements Regist
 			boolean abierto, int plazas_ocupadas) throws RemoteException {
 		ServicioParking c = new ServicioParkingImpl(nombre, latitud, longitud, capacidadTotal, abierto, plazas_ocupadas);
 		l_park.add(c);
+		ServidorCity.getLogger().info("[AVISO:SRV_REG] Se ha registrado un nuevo Parking. (Actual: " + l_park.size() + ")");
 		return c;
 	}
 
@@ -40,6 +44,7 @@ public class RegistraServiciosImpl extends UnicastRemoteObject implements Regist
 	public ServicioFarola crearSrvFarola(float latitud, float longitud, String color, boolean estado) throws RemoteException {
 		ServicioFarola c = new ServicioFarolaImpl(latitud, longitud, color, estado);
 		l_far.add(c);
+		ServidorCity.getLogger().info("[AVISO:SRV_REG] Se ha registrado una nuevo farola. (Actual: " + l_far.size() + ")");
 		return c;
 	}
 
