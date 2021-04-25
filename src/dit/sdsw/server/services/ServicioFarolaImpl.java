@@ -79,7 +79,7 @@ public class ServicioFarolaImpl extends UnicastRemoteObject implements ServicioF
 	
 	@Override
 	public String toString() {
-		return (id.toString().substring(0, 5) + "\t" + latitud + "\t" + longitud + "\t" + color + "\t" + estado);
+		return (id.toString().substring(0, 5) + "\t " + latitud + "\t " + longitud + "\t " + color + "\t " + estado);
 	}
 	
 
