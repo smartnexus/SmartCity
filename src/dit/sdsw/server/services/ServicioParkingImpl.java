@@ -52,7 +52,7 @@ public class ServicioParkingImpl extends UnicastRemoteObject implements Servicio
 	
 	@Override
 	public String toString() {
-		return (nombre + "\t" + latitud + "\t" + longitud + "\t" + capacidadTotal + "\t" + abierto + "\t" + plazasOcupadas);
+		return (nombre + "," + latitud + "," + longitud + "," + capacidadTotal + "," + abierto + "," + plazasOcupadas);
 	}
 
 }

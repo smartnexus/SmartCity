@@ -3,6 +3,7 @@ package dit.sdsw.server;
 
 import java.util.List;
 
+import dit.sdsw.Color;
 import dit.sdsw.server.services.RegistraServiciosImpl;
 import dit.sdsw.server.services.ServicioContenedor;
 import dit.sdsw.server.services.ServicioFarola;
@@ -11,47 +12,77 @@ import dit.sdsw.server.services.ServicioParking;
 public class Listas {
 	
 	private RegistraServiciosImpl srv;
-	private String id = "Id";
-	private String latitud = "Latitud";
-	private String longitud = "Longitud";
-	private String tipo = "Tipo";
-	private String porcentaje = "Porcentaje";
-	private String color = "Color";
-	private String estado = "Estado";
-	private String nombre = "Nombre";
-	private String capacidad = "Capacidad Total";
-	private String abierto = "Abierto";
-	private String plazas = "Plazas Ocupadas";
+	//Cabeceras
+	String[] cabCont = "ID,LATITUD,LONGITUD,TIPO,PORCENTAJE".split(",");
+	String[] cabFar = "ID,LATITUD,LONGITUD,COLOR,ESTADO".split(",");
+	String[] cabPar = "NOMBRE,LATITUD,LONGITUD,CAPACIDAD TOTAL,ABIERTO,PLAZAS OCUPADAS".split(",");
 	
-	Listas (RegistraServiciosImpl srv) {
-		this.srv = srv;
+	
+	public Listas (RegistraServiciosImpl srv) {
+		this.srv = srv;		
 	}
-	
+
 	public void listarContenedores () {
 		List<ServicioContenedor> lista = srv.getL_cont();
-		System.out.println(id + "\t" + latitud + "\t" + longitud + "\t" + tipo + "\t" + porcentaje);
-		for(int indice = 0;indice<lista.size();indice++)
-		{
-		    System.out.println(lista.get(indice).toString());
+		
+		if (lista.isEmpty()) {
+			System.out.println(Color.RED +"\n\tAún no existe ningún contenedor inteligente en la ciudad." + Color.RESET);
+		}else {
+			for (String i : cabCont) {
+				System.out.format(Color.PURPLE+"%20s"+Color.RESET, i);
+			}
+			System.out.println();
+			
+			for(int indice = 0;indice<lista.size();indice++)
+			{
+				for(String a : lista.get(indice).toString().split(",")) {
+					System.out.format("%20s", a);
+				}
+				System.out.println();			
+			}
 		}
 	}
 	
 	public void listarFarolas () {
 		List<ServicioFarola> lista = srv.getL_far();
-		System.out.println(id + "\t" + latitud + "\t" + longitud + "\t" + color + "\t" + estado);
-		for(int indice = 0;indice<lista.size();indice++)
-		{
-		    System.out.println(lista.get(indice).toString());
+		
+		if (lista.isEmpty()) {
+			System.out.println(Color.RED +"\n\tAún no existe ninguna farola inteligente en la ciudad." + Color.RESET);
+		}else {
+			for (String i : cabFar) {
+				System.out.format(Color.PURPLE+"%20s"+Color.RESET, i);
+			}
+			System.out.println();
+			
+			for(int indice = 0;indice<lista.size();indice++)
+			{
+				for(String a : lista.get(indice).toString().split(",")) {
+					System.out.format("%20s", a);
+				}
+				System.out.println();			
+			}
 		}
 	}
 	
 	public void listarParkings () {
 		List<ServicioParking> lista = srv.getL_park();
-		System.out.println(nombre + "\t" + latitud + "\t" + longitud + "\t" + capacidad + "\t" + abierto + "\t" + plazas);
-		for(int indice = 0;indice<lista.size();indice++)
-		{
-		    System.out.println(lista.get(indice).toString());
+		
+		if (lista.isEmpty()) {
+			System.out.println(Color.RED +"\n\tAún no existe ningún parking inteligente en la ciudad." + Color.RESET);
+		}else {
+			for (String i : cabPar) {
+				System.out.format(Color.PURPLE+"%20s"+Color.RESET, i);
+			}
+			System.out.println();
+			
+			for(int indice = 0;indice<lista.size();indice++)
+			{
+				for(String a : lista.get(indice).toString().split(",")) {
+					System.out.format("%20s", a);
+				}
+				System.out.println();			
+			}
 		}
-	}
+	}	
 }
 
