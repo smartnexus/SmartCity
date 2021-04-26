@@ -1,0 +1,34 @@
+CREATE DATABASE sdsw;
+
+\c sdsw
+
+DROP TABLE contenedores;
+DROP TABLE parkings;
+DROP TABLE farolas;
+
+CREATE TABLE contenedores (
+	id VARCHAR,
+	lat VARCHAR,
+	long VARCHAR,
+	tipo VARCHAR,
+	perc DECIMAL,
+	fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP PRIMARY KEY
+);	
+
+CREATE TABLE parkings (
+	nombre VARCHAR,
+	lat VARCHAR,
+	long VARCHAR,
+	abierto VARCHAR,
+	plazas INTEGER,
+	fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP PRIMARY KEY
+);
+
+CREATE TABLE farolas (
+	id VARCHAR,
+	lat VARCHAR,
+	long VARCHAR,
+	color VARCHAR,
+	estado VARCHAR,
+	fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP PRIMARY KEY
+);

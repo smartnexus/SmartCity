@@ -6,8 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import dit.sdsw.Color;
-//import dit.sdsw.Utils;
-import dit.sdsw.sensors.SensorContenedor; //TODO: Comentar esto, no debe importarse
+import dit.sdsw.sensors.SensorContenedor;
 import dit.sdsw.sensors.SensorParking;
 import dit.sdsw.sensors.SensorFarola;
 import dit.sdsw.server.services.RegistraServicios;

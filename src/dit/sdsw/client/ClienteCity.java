@@ -4,7 +4,7 @@ import java.rmi.*;
 import java.util.Scanner;
 
 import dit.sdsw.Color;
-import dit.sdsw.server.services.*; //TODO: descomentar?
+import dit.sdsw.server.services.*;
 
 
 class ClienteCity {
@@ -39,7 +39,6 @@ class ClienteCity {
         	do {
         		System.out.print(Color.YELLOW + "\nSeleccione el NÚMERO del elemento inteligente que desea crear: " + Color.RESET);
         		entradaTeclado = entradaEscaner.nextInt(); //Invocamos un método sobre un objeto Scanner
-                /// System.out.println ("Entrada recibida por teclado es: \"" + entradaTeclado +"\"");  
         	} while (entradaTeclado!=1 && entradaTeclado!=2 && entradaTeclado!=3); 
            
         	RegistraServicios srv = (RegistraServicios) Naming.lookup("//" + args[0] + ":" + args[1] + "/RegistraServicios");

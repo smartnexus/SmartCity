@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import dit.sdsw.Color;
 import dit.sdsw.Utils;
-import dit.sdsw.client.Secuencias;
 import dit.sdsw.server.services.RegistraServicios;
 import dit.sdsw.server.services.RegistraServiciosImpl;
 
@@ -24,7 +23,7 @@ public class ServidorCity {
         }
 		
 		Utils.initRMIRegistry(args[0]);
-		System.out.println(Color.RED + "Registro RMI creado en el puerto: " + args[0] + Color.RESET);
+		System.out.println(Color.BLUE + "[*] Registro RMI creado en el puerto: " + args[0] + Color.RESET);
 		
         if (System.getSecurityManager() == null) {
             System.setSecurityManager(new RMISecurityManager());
@@ -40,6 +39,7 @@ public class ServidorCity {
             Naming.rebind("rmi://localhost:" + args[0] + "/RegistraServicios", srv);
 
             int entradaTeclado = 0;
+            Scanner entradaEscaner;
             do {
             	System.out.println ("¿Qué desea hacer?");
 	            System.out.println (Color.BLUE + "\t 1) "+ Color.RESET + " Listar CONTENEDORES existentes en la ciudad.");
@@ -49,12 +49,11 @@ public class ServidorCity {
 	        	System.out.println (Color.BLUE + "\t 5) "+ Color.RESET + " Salir");	
 	        	
 	        	
-	        	Scanner entradaEscaner = new Scanner(System.in); //Creación de un objeto Scanner
+	        	entradaEscaner = new Scanner(System.in); //Creación de un objeto Scanner
 	        	
 	        	do {
 	        		System.out.print (Color.YELLOW + "Seleccione la opción deseada: "+ Color.RESET);
 	        		entradaTeclado = entradaEscaner.nextInt(); //Invocamos un método sobre un objeto Scanner
-	                /// System.out.println ("Entrada recibida por teclado es: \"" + entradaTeclado +"\"");  
 	        	} while (entradaTeclado!=1 && entradaTeclado!=2 && entradaTeclado!=3 && entradaTeclado!=4 && entradaTeclado!=5); 
 	        	
 	        	switch (entradaTeclado) {
@@ -94,15 +93,16 @@ public class ServidorCity {
 	        	}      	
 	        	
             } while(entradaTeclado!=5);
+            
+            entradaEscaner.close();
             System.exit(0);
         }
         catch (RemoteException e) {
-            System.err.println("Error de comunicacion: " + e.toString());
+        	System.err.println(Color.RED + "[*] Error de comunicacion con clientes.");
             System.exit(1);
         }
         catch (Exception e) {
-            System.err.println("Excepcion en ServidorLog:");
-            e.printStackTrace();
+        	System.err.println(Color.RED + "[*] Excepción en ClienteCity.");
             System.exit(1);
         }
 	}

@@ -10,8 +10,7 @@ public class Utils {
 		try {
 			LocateRegistry.createRegistry(Integer.valueOf(portNumber));
 		} catch (RemoteException e) {
-			System.err.println("Puerto " + portNumber + "en uso.");
-			e.printStackTrace();
+			System.err.println(Color.RED + "[*] Puerto " + portNumber + "en uso." + Color.RESET);
 		}
 	}
 		
@@ -42,58 +41,59 @@ public class Utils {
 		double tiempo = (double) ((ahora - inicio)/1000);
 		int hora = (int) (tiempo % 24);
 		switch (hora) {
-		case 0: nivel = 80;
-		break;
-		case 1: nivel = 60;
-		break;
-		case 2: nivel = 40;
-		break;
-		case 3: nivel = 40;
-		break;
-		case 4: nivel = 40;
-		break;
-		case 5: nivel = 40;
-		break;
-		case 6: nivel = 25;
-		break;
-		case 7: nivel = 15;
-		break;
-		case 8: nivel = 10;
-		break;
-		case 9: nivel = 0;
-		break;
-		case 10: nivel = 0;
-		break;
-		case 11: nivel = 0;
-		break;
-		case 12: nivel = 0;
-		break;
-		case 13: nivel = 0;
-		break;
-		case 14: nivel = 0;
-		break;
-		case 15: nivel = 0;
-		break;
-		case 16: nivel = 0;
-		break;
-		case 17: nivel = 0;
-		break;
-		case 18: nivel = 0;
-		break;
-		case 19: nivel = 0;
-		break;
-		case 20: nivel = 0;
-		break;
-		case 21: nivel = 40;
-		break;
-		case 22: nivel = 100;
-		break;
-		case 23: nivel = 100;
-		break;
-		default: nivel = 0; //Si por lo que sea falla la hora por ahorro energetico mejor dejarla apagada
-		break;
+			case 0: nivel = 80;
+			break;
+			case 1: nivel = 60;
+			break;
+			case 2: nivel = 40;
+			break;
+			case 3: nivel = 40;
+			break;
+			case 4: nivel = 40;
+			break;
+			case 5: nivel = 40;
+			break;
+			case 6: nivel = 25;
+			break;
+			case 7: nivel = 15;
+			break;
+			case 8: nivel = 10;
+			break;
+			case 9: nivel = 0;
+			break;
+			case 10: nivel = 0;
+			break;
+			case 11: nivel = 0;
+			break;
+			case 12: nivel = 0;
+			break;
+			case 13: nivel = 0;
+			break;
+			case 14: nivel = 0;
+			break;
+			case 15: nivel = 0;
+			break;
+			case 16: nivel = 0;
+			break;
+			case 17: nivel = 0;
+			break;
+			case 18: nivel = 0;
+			break;
+			case 19: nivel = 0;
+			break;
+			case 20: nivel = 0;
+			break;
+			case 21: nivel = 40;
+			break;
+			case 22: nivel = 100;
+			break;
+			case 23: nivel = 100;
+			break;
+			default: nivel = 0; //Si por lo que sea falla la hora por ahorro energetico mejor dejarla apagada
+			break;
 		}
+		
 		return nivel;
-		}
-	}	
+	}
+}	
 

@@ -17,7 +17,6 @@ public class ServicioContenedorImpl extends UnicastRemoteObject implements Servi
 	private int tipo; //tipo: 1-Vidrio/ 2-Cartón/ 3-Orgánico/ 4-Plástico
 	private float porcentaje;
 	private boolean vaciar;
-	private boolean alertado;
 	
 
 	public ServicioContenedorImpl(float latitud, float longitud, int tipo) throws RemoteException {
@@ -27,16 +26,14 @@ public class ServicioContenedorImpl extends UnicastRemoteObject implements Servi
 		this.tipo = tipo;
 		this.porcentaje = 0; //Porcentaje lleno
 		this.vaciar = false; 
-		this.alertado = false;
 	}
 
 	@Override
 	public void alertarLleno() throws RemoteException, InterruptedException{
-		// TODO: Cómo vamos a avisar. DUDAS aquí
 		ServidorCity.getLogger().info("[AVISO:SRV_CONT] Contenedor lleno  (ID = " + id.toString().substring(0,5) + ")");
 		ServidorCity.getLogger().info("**************** Avisando al servicio de recogida de residuos (ID = " + id.toString().substring(0,5) + ")");
-		this.vaciar = true;
 		Thread.sleep(5000);  //Simula proceso en el que se van a recoger los residus	
+		this.vaciar = true;
 	}
 	
 	@Override
@@ -53,7 +50,6 @@ public class ServicioContenedorImpl extends UnicastRemoteObject implements Servi
 	@Override
 	public void cambiarVaciar(boolean vaciar) throws RemoteException {
 		this.vaciar = vaciar;
-		this.alertado = false;
 	}
 	
 	@Override

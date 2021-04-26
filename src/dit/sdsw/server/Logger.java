@@ -6,7 +6,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import dit.sdsw.Color;
-import dit.sdsw.Utils;
 import dit.sdsw.server.services.ServicioContenedor;
 import dit.sdsw.server.services.ServicioContenedorImpl;
 import dit.sdsw.server.services.ServicioFarola;
@@ -27,14 +26,11 @@ public class Logger {
 			System.err.println(e);
 			System.exit(1);
 		}
-		//TODO: inicializar fuera.
-		String url= "jdbc:postgresql://localhost:5432/dit";
-		String user = "dit";
-		String pass = "dit";
 		
-		//backupValues(url, user, pass);
 		this.listas = listas;
 		this.enabled = enabled;
+		
+		backupValues("jdbc:postgresql://localhost:5432/sdsw", "dit", "dit");
 	}
 	
 	public void info(String m) {
@@ -55,23 +51,28 @@ public class Logger {
 	
 	public void backupValues(String url, String user, String pass) {
 		LogsDAO logs = new LogsDAO(url, user, pass);
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				for(ServicioContenedor contenedor : listas.getSrv().getL_cont()) {
-					logs.guardarContenedor((ServicioContenedorImpl) contenedor);
+		if(logs.checkConnection()) {
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					for(ServicioContenedor contenedor : listas.getSrv().getL_cont()) {
+						logs.guardarContenedor((ServicioContenedorImpl) contenedor);
+					}
+					
+					for(ServicioParking parking : listas.getSrv().getL_park()) {
+						logs.guardarParking((ServicioParkingImpl) parking);
+					}
+					
+					for(ServicioFarola farola : listas.getSrv().getL_far()) {
+						logs.guardarFarolas((ServicioFarolaImpl) farola);
+					}
 				}
-				
-				for(ServicioParking parking : listas.getSrv().getL_park()) {
-					logs.guardarParking((ServicioParkingImpl) parking);
-				}
-				
-				for(ServicioFarola farola : listas.getSrv().getL_far()) {
-					logs.guardarFarolas((ServicioFarolaImpl) farola);
-				}
-			}
-		}, 0, 8000);
+			}, 0, 8000);
+		} else {
+			System.err.println(Color.RED + "[*] No se ha podido realizar la conexión con la base de datos. "
+					+ "Desactivando backup automático...\n" + Color.RESET);
+		}
 	}
 
 }

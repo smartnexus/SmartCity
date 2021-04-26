@@ -1,9 +1,6 @@
 package dit.sdsw.server;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 import dit.sdsw.server.services.ServicioContenedorImpl;
 import dit.sdsw.server.services.ServicioFarolaImpl;
@@ -21,6 +18,21 @@ public class LogsDAO {
 		this.pass = pass;
 	}
 	
+	public boolean checkConnection() {
+		Connection connection;
+		boolean resultado = false;
+		try {
+			Class.forName("org.postgresql.Driver");
+			connection = DriverManager.getConnection(url, user, pass);
+			resultado = connection.isValid(50000);
+		} catch (SQLException e) {
+			//Nada que hacer
+		} catch (ClassNotFoundException e) {
+			//Nada que hacer
+		}           
+        return resultado;
+	}
+	
 	public boolean guardarContenedor(ServicioContenedorImpl srv) {
 		Connection conn;
 		boolean resultado = false;
@@ -30,10 +42,10 @@ public class LogsDAO {
 			PreparedStatement st = conn.prepareStatement(sql);
 			String[] valores = srv.toString().split(",");
 			st.setString(1, valores[0]);
-			st.setString(1, valores[1]);
-			st.setString(1, valores[2]);
-			st.setString(1, valores[3]);
-			st.setFloat(1, Float.parseFloat(valores[4]));
+			st.setString(2, valores[1]);
+			st.setString(3, valores[2]);
+			st.setString(4, valores[3]);
+			st.setFloat(5, Float.parseFloat(valores[4]));
 			int contador = st.executeUpdate();
 			if (contador == 1) {
 				resultado=true;
@@ -57,10 +69,10 @@ public class LogsDAO {
 			PreparedStatement st = conn.prepareStatement(sql);
 			String[] valores = srv.toString().split(",");
 			st.setString(1, valores[0]);
-			st.setString(1, valores[1]);
-			st.setString(1, valores[2]);
-			st.setString(1, valores[4]);
-			st.setInt(1, Integer.parseInt(valores[5]));
+			st.setString(2, valores[1]);
+			st.setString(3, valores[2]);
+			st.setString(4, valores[4]);
+			st.setInt(5, Integer.parseInt(valores[5]));
 			int contador = st.executeUpdate();
 			if (contador == 1) {
 				resultado=true;
@@ -84,10 +96,10 @@ public class LogsDAO {
 			PreparedStatement st = conn.prepareStatement(sql);
 			String[] valores = srv.toString().split(",");
 			st.setString(1, valores[0]);
-			st.setString(1, valores[1]);
-			st.setString(1, valores[2]);
-			st.setString(1, valores[3]);
-			st.setString(1, valores[4]);
+			st.setString(2, valores[1]);
+			st.setString(3, valores[2]);
+			st.setString(4, valores[3]);
+			st.setString(5, valores[4]);
 			int contador = st.executeUpdate();
 			if (contador == 1) {
 				resultado=true;
