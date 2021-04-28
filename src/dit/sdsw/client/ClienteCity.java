@@ -18,13 +18,13 @@ class ClienteCity {
             System.setSecurityManager(new SecurityManager());
 
         try {
-//        	System.out.println("   ____                       _       ____ _ _           ");
-//        	System.out.println("  / ___| _ __ ___   __ _ _ __| |_    / ___(_) |_         ");
-//        	System.out.println("  \___ \| '_ ` _ \ / _` | '__| __|  | |   | | __| | | |  ");
-//        	System.out.println("   ___) | | | | | | (_| | |  | |_   | |___| | |_| |_| |  ");
-//        	System.out.println("  |____/|_| |_| |_|\__,_|_|   \__|   \____|_|\__|\__, |  ");
-//        	System.out.println("                                                 |___/   ");
-//        	System.out.println("                                                         ");
+			System.out.println("\t\t __                      _       ___ _ _         ");
+			System.out.println("\t\t/ _\\_ __ ___   __ _ _ __| |_    / __(_) |_ _   _ ");
+			System.out.println("\t\t\\ \\| '_ ` _ \\ / _` | '__| __|  / /  | | __| | | |");
+			System.out.println("\t\t_\\ \\ | | | | | (_| | |  | |_  / /___| | |_| |_| |");
+			System.out.println("\t\t\\__/_| |_| |_|\\__,_|_|   \\__| \\____/|_|\\__|\\__, |");
+			System.out.println("\t\t                                           |___/ ");
+			System.out.println("\t\t                                                 ");
         	
         	
         	//Solicitar qué elemento inteligente se quiere crear
